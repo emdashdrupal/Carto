@@ -1,10 +1,10 @@
 This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.2.1**.
 
-這是 Carto 使用手冊的首頁，中文版說明請由此進；**目前手冊適用於版本 0.2.1**。
+這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.1**。
 
 ### Installation
 
-You can add the mod on Paradox Mods, which is the only official distribution channel. Once you launch the game, the mod should be downloaded to your device and start installing.
+You can add the mod on Paradox Mods, which is the only official distribution channel. Once you launch the game, the mod should be loaded to your device.
 
 ### Chapters
 
