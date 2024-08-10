@@ -117,7 +117,7 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 * 幾何類型：向量（多邊形）
 * 說明：圖徵的邊緣，是最泛用的空間欄位。
   * 對於 `建築` 圖徵而言，這表示的是**建築的碰撞範圍**（原版遊戲內會提示物件重疊的區域）
-  * 對於 `網路` 圖徵而言，這表示的是**道路用地的範圍**。
+  * 對於 `網路` 圖徵而言，這表示的是**道路用地的範圍**。**注意**：目前網路的邊緣輸出後可能會出現無效的圖形，建議使用 GIS 軟體的「修正幾何」功能處理資料。
 
 #### 高程 Elevation
 
@@ -401,7 +401,7 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 
 *0.2.2 版本預設的雜項分頁介面。*
 
-最後一個分頁是雜項分頁。第一個是 <span id="GeoTIFF格式">**GeoTIFF 格式**</span>選項，一共有三種模式可供選擇，分別是「Int16」、「Norm16」和「Float32」。三者的對照表如下：
+最後一個分頁是雜項分頁。第一個是 <a id="GeoTIFF格式"></a>**GeoTIFF 格式**選項，一共有三種模式可供選擇，分別是「Int16」、「Norm16」和「Float32」。三者的對照表如下：
 
 |  簡稱  |       全稱        | 說明 |
 | ------ | ---------------- | ---- |
@@ -409,7 +409,7 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 | Norm16 |16位元標準化整數   | 將 Int16 的資料標準化的格式，**可作為地圖編輯器的高度圖使用**。      |
 | Float32|32位元浮點數       | 提供精度可達小數點後數位的資料，但是 **檔案大小為 Int16 的兩倍**。   |
 
-第二個是<span id="計入無家可歸居民">**計入無家可歸居民**</span>選項，當開啟此選項時，無家可歸且**住在公園**的市民會被計入到對應的[居民](#居民-resident)與[家庭](#家庭-household)欄位中。下表是 Carto 進行人口統計時參考的項目：
+第二個是<a id="計入無家可歸居民"></a>**計入無家可歸居民**選項，當開啟此選項時，無家可歸且**住在公園**的市民會被計入到對應的[居民](#居民-resident)與[家庭](#家庭-household)欄位中。下表是 Carto 進行人口統計時參考的項目：
 
 | 欄位       | 一般市民 | 無家可歸者      | 外來人口（旅客／過境／移工）| 說明 |
 | --------- | ---------| ---------------|--------------------------|------|
@@ -418,9 +418,9 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 
 *假設啟用「計入無家可歸居民」時，Carto 的計算方式*
 
-第三個是<span id="輸出無分區單元">**輸出無分區單元**</span>選項，當開啟此選項時，Carto 會輸出所有的分區單元格。由於隨著城市發展越大，出現無分區格子的頻率會越高，使得檔案虛胖；因此對於想節省空間的使用者，建議可以關閉此選項。
+第三個是<a id="輸出無分區單元"></a>**輸出無分區單元**選項，當開啟此選項時，Carto 會輸出所有的分區單元格。由於隨著城市發展越大，出現無分區格子的頻率會越高，使得檔案虛胖；因此對於想節省空間的使用者，建議可以關閉此選項。
 
-第四個是<span id="使用ZoneColorChanger的顏色">**使用 Zone Color Changer 的顏色**</span>選項，會在遊戲同時載入 Carto 與 [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) 模組時出現。當開啟此選項時，Carto 輸出的[顏色](#顏色-color)欄位將採用 Zone Color Changer 設定的顏色。
+第四個是<a id="使用ZoneColorChanger的顏色"></a>**使用 Zone Color Changer 的顏色**選項，會在遊戲同時載入 Carto 與 [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) 模組時出現。當開啟此選項時，Carto 輸出的[顏色](#顏色-color)欄位將採用 Zone Color Changer 設定的顏色。
 
 ![使用 Zone Color Changer 的顏色選項](src/Carto-Misc-ZCC-zh.png)
 
@@ -428,7 +428,49 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 
 ## 輸出後——再來呢？
 
-<span id="輸出後再來呢？"></span>
+<a id="輸出後再來呢？"></a>那麼在你輸出完之後，要如何檢視與運用這些資料呢？以下根據不同的情境，提供你一些資源與靈感：
+
+### 使用線上檢視器
+
+對於想要看到輸出效果，但無法使用 GIS 軟體的使用者而言，這會是你檢視這些空間資料的主要途徑。以下列出部分可以檢視這些地理空間檔案的網站：
+
+* [mapshaper](https://mapshaper.org/)：可以檢視 GeoJSON 和 Shapefile，讀取速度快，還可以重疊圖層（推薦）。
+* [geojson.io](https://geojson.io/)：可以檢視 GeoJSON，同時還可以編輯檔案與上色等（推薦）。
+* [Survey Transfer](https://app.surveytransfer.net/)：可以檢視 GeoJSON、Shapefile 與 GeoTIFF，**但是需要註冊帳號、14日免費試用**（不推薦）。
+* [ArcGIS Online](https://maps.arcgis.com/apps/mapviewer/index.html)：可以檢視 GeoJSON、Shapefile 與 GeoTIFF，授權夭壽貴，除非你剛好有帳號可以使用，不然免費使用者無法上傳地理空間資料（不推薦）。
+
+### 使用 GIS 軟體
+
+這是 Carto 推薦的方案，因為它們不僅是提供你檢視、編輯資料的強大平臺，還可以進行深入的地理分析。以下列出部分可以讀取這些地理空間檔案的 GIS 軟體：
+
+* [QGIS](https://www.qgis.org/)：開源免費的 GIS 軟體，還有眾多由志願者開發並維護的插件。中文入門教學可以參考中研院人社中心的 [QGIS及Open Geodata資源網](https://gis.rchss.sinica.edu.tw/qgis/)、臺大地理系溫在弘教授的 [QGIS 人口地圖繪製教學網](https://wenlab501.github.io/tutorial/qgis_tutor/)與黃敏郎的[同名 YouTube 頻道](https://www.youtube.com/@huangyoshi/videos)等（推薦）。
+* [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm)：由 Esri 開發的付費軟體，相較於它的線上版本（ArcGIS Online），安裝在電腦上的版本可以執行的功能更加多元，而且官方提供中文教學（如果你有帳號的話，推薦）。
+
+### 使用程式套件
+
+如果你有與其他軟體或程式語言整合的需求，可以考慮使用各程式語言對應的相關套件處理。以下列出部分可以處理地理空間資料的套件：
+
+* [GDAL](https://github.com/OSGeo/gdal)：由 OGC 維護的地理空間資料轉檔軟體，是這邊列出的不少軟體與套件的基底之一。
+* [GeoPandas](https://github.com/geopandas/geopandas)：Python 套件，由其名稱不難看出，它與 Pandas 存取資料的方式相近，都是用類似 `DataFrame` 類別（`GeoDataFrame`）來存取地理空間資料。
+* [sf](https://github.com/r-spatial/sf)：R 套件，同樣使用似 `data.frame` 的類別（`sf`，simple feature）來存取資料。
+
+你可以在 [Awesome GIS](https://github.com/sshuair/awesome-gis) 中找到更多關於處理地理空間資料的軟體與套件資訊。
+
+### 給我一些靈感！
+
+沒問題，這邊提供你一些靈感：
+
+![經典的街道圖](src/Carto-Example-1.png)
+
+*一張經典的街道圖，使用了區域、建築、網路（邊緣）、地形與水體圖徵。*
+
+![飲料市場分析圖](src/Carto-Example-2.png)
+
+*分析城市內飲料產業的資訊，使用了區域、建築與水體圖徵。*
+
+![應用在相片的空間對位](src/Carto-Example-3.png)
+
+*你可以使用建築、網路、分區等圖徵來輔助相片的空間對位。*
 
 ## 更新日誌
 
