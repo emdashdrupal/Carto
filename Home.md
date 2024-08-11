@@ -430,6 +430,50 @@ The fourth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color
 
 ## Post-export: What’s Next?
 
+So after you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations:
+
+### Using Online Viewers
+
+For the users who want to visualize the exported files but don’t have access to GIS software, this will be their primary method to view the geospatial data. Here are some of the websites where you can view the data:
+
+* [mapshaper](https://mapshaper.org/) supports GeoJSON and Shapefile. You can import multiple layers and the file-loading process is efficient. (Recommended)
+* [geojson.io](https://geojson.io/) supports GeoJSON. You can edit the shape and change the color at the same time. (Recommended)
+* [Survey Transfer](https://app.surveytransfer.net/) supports GeoJSON, Shapefile, and GeoTIFF. The website requires you to register your account only with a 14-day free trial. (Not recommended)
+* [ArcGIS Online](https://maps.arcgis.com/apps/mapviewer/index.html) supports GeoJSON, Shapefile, and GeoTIFF. However, you have to purchase the license to access the features. (Not recommended if you don’t have a license.)
+
+### Using GIS Software
+
+Carto recommends users use GIS software because it provides them with not only a powerful platform to view and edit the data but also a set of tools to perform in-depth geographical analysis. Here are some of the GIS software you can use:
+
+* [QGIS](https://www.qgis.org/) is a free and open-source software, and there are numerous QGIS plug-ins developed and maintained by volunteers. (Recommended)
+* [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is a paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from. (Recommended if you have a license)
+
+### Using Geospatial Libraries
+
+If you want to develop a program that works with the data, you might consider some of the following libraries:
+
+* [GDAL](https://github.com/OSGeo/gdal) is a library that serves as a convertor between multiple geospatial data formats.
+* [GeoPandas](https://github.com/geopandas/geopandas) is a Python library where you can access data by the class `GeoDataFrame`.
+* [sf](https://github.com/r-spatial/sf) is an R library where you can access data by the class `sf` (simple feature).
+
+You can find more information on this topic at [Awesome GIS](https://github.com/sshuair/awesome-gis).
+
+### Show Me Some Examples!
+
+Sure, here are some of the examples you can made with Carto:
+
+![Classic Street Map](src/Carto-Example-1.png)
+
+*A classic street map using Area, Building, Network (Edge), Terrain, and Water Bodies features.*
+
+![Beverage Industry Map](src/Carto-Example-2.png)
+
+*A map showing the fierce competition of the beverage industry in the city, using Area, Building, and Water Bodies features.*
+
+![Application In Georeferencing](src/Carto-Example-3.png)
+
+*This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process.*
+
 ## Changelog
 
 ### 0.2.2
