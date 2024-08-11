@@ -485,6 +485,7 @@ Sure, here are some of the examples you can made with Carto:
 * Fix the bug that the mod can not export Shapefiles when the directory `ModsData\Carto\Shapefile` doesn’t exist.
 * Remove UTF-8 BOM at the beginning of `.prj` files, so ArcGIS Pro can correctly identify the CRS of the Shapefiles.
 * Added the export success dialog.
+* Added support for the networks made by Road Builder mod.
 
 Note: <u>Underlined</u> fields are newly added.
 

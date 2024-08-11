@@ -483,6 +483,7 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 * 修正 `ModsData\Carto\Shapefile` 資料夾不存在時，無法輸出的錯誤。
 * 移除 `*.prj` 檔案開頭的 UTF-8 BOM 與排版，使 ArcGIS Pro 可以正確辨識 Shapefile 的座標系統。
 * 添加輸出成功視窗，提醒使用者已經輸出完成。
+* 添加對以 Road Builder 模組製作的網路的支援。
 
 註記：<u>底線</u>表示為新欄位。
 
