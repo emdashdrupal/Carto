@@ -1,4 +1,4 @@
-這是 Carto 使用手冊的首頁，請參閱各章節獲得更多資訊。**目前手冊適用於版本 0.2.2**。
+這是 Carto 使用手冊的首頁，請參閱各章節獲得更多資訊。**目前手冊適用於版本 0.2.3**。
 
 This is the homepage of Carto’s user manual; please visit [[English version|Home]] here. **The current manual version is compatible with version 0.2.2**.
 
@@ -473,6 +473,10 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 *你可以使用建築、網路、分區等圖徵來輔助相片的空間對位。*
 
 ## 更新日誌
+
+### 0.2.3
+
+* 修正當輸出時存在至少一個「無法找到符合對象實體」的已選取圖徵時，輸出流程會被終止的錯誤。這些圖徵現在會被忽略，並且使用者會在輸出完成時被告知忽略的檔案。［由 [@Allegretic](https://mods.paradoxplaza.com/authors/Allegretic) 回報］
 
 ### 0.2.2
 

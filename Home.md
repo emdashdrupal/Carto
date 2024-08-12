@@ -1,6 +1,6 @@
 This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.2.2**.
 
-這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.2**。
+這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.3**。
 
 ### Installation
 
@@ -475,6 +475,10 @@ Sure, here are some of the examples you can made with Carto:
 *This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process.*
 
 ## Changelog
+
+### 0.2.3
+
+* Fixed the bug where the export process stopped when at least one chosen feature doen’t have matching entities. These features are now ignored and the user will be notified at the end of the export. [Reported by [@Allegretic](https://mods.paradoxplaza.com/authors/Allegretic)]
 
 ### 0.2.2
 
