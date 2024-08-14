@@ -213,6 +213,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
     * `Water`
 
   * The category of networks:
+    * `None` 
     * `Small`
     * `Medium`
     * `Large`
@@ -475,6 +476,12 @@ Sure, here are some of the examples you can made with Carto:
 *This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process.*
 
 ## Changelog
+
+### 0.2.4
+
+* Fixed the issue where the Edge field of the Network feature could not be read by software such as ArcGIS. [Reported by [Cities: Skylines LightLight](https://www.youtube.com/@CS_LightLight)]
+* Fixed the jagged edges of some pathways connecting to the normal roads.
+* Tried to fix the problem of the exported Edge field of the Network feature containing invalid polygons. Some micro (< 1m) self-intersections may still appear when the roads are connected at a very sharp angle.
 
 ### 0.2.3
 
