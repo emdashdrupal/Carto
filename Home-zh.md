@@ -1,6 +1,6 @@
-這是 Carto 使用手冊的首頁，請參閱各章節獲得更多資訊。**目前手冊適用於版本 0.2.4**。
+這是 Carto 使用手冊的首頁，請參閱各章節獲得更多資訊。**目前手冊適用於版本 0.2.5**。
 
-This is the homepage of Carto’s user manual; please visit [[English version|Home]] here. **The current manual version is compatible with version 0.2.4**.
+This is the homepage of Carto’s user manual; please visit [[English version|Home]] here. **The current manual version is compatible with version 0.2.5**.
 
 ### 安裝
 
@@ -47,7 +47,15 @@ Carto 的使用者介面位於**選項**中，你可以從遊戲主畫面上直�
 
 ![自訂名稱輸入框](src/Carto-General-Custom-Format-zh.png)
 
-在「自訂名稱」輸入框中可以使用**變數**來顯示存檔的部份參數：`{Feature}` 表示圖徵類型，`{City}` 表示城市名稱，而 `{Map}` 表示地圖名稱。舉例來說，你可以輸入 `{Map}-{City}-{Feature}`，並獲得名為 `我的地圖-我的城市-Area.shp`、`我的地圖-我的城市-Building.json` 與 `我的地圖-我的城市-Terrain.tif` 的檔案。
+在「自訂名稱」輸入框中可以使用**變數**來顯示存檔的部份參數，以下是你所能使用的變數列表：
+
+| 變數 | 說明 | 範例 |
+| ----- | ----------- | ------- |
+| `{Feature}` | 圖徵類型。 | `Area` |
+| `{City}`    | 城市名稱。 | `My City` |
+| `{Map}`     | 地圖名稱。 | `My Map` |
+| `{Date}`    | 遵循 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 的遊戲內日期。 | `2027-04` |
+| `{Time}`    | 使用 `HHmm` 格式的遊戲內時間。 | `1200` |
 
 **經度**與**緯度**選項是重頭戲：只需要填入**地圖中心點**的經緯度座標（你可以使用 Google Maps 等線上地圖找出目標地點的經緯度），Carto 便可以將城市投影到地球上的絕大部分地點。當然如果你沒有特別想要投影到哪裡去，而是著重在觀看存檔的整體呈現效果，可以將經緯度設為 0 即可。
 
@@ -154,8 +162,9 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 * 欄位類型：複合（字串、整數）
 * 說明：遊戲內建築的編碼。
   * 此欄位為**複合欄位**，輸出後會變成三個欄位：
-    * GeoJSON：`Address.District`（行政區）、`Address.Street`（道路）、`Address.Number`（門牌號碼）
-    * Shapefile：`Addr.dist`（行政區）、`Addr.strt`（道路）、`Addr.nmbr`（門牌號碼）
+    * GeoJSON：`Address_District`（行政區）、`Address_Street`（道路）、`Address_Number`（門牌號碼）
+    * Shapefile：`Addr_dist`（行政區）、`Addr_strt`（道路）、`Addr_nmbr`（門牌號碼）
+    * 在 0.2.5 更新以前，這些欄位分別為：`Address.District`、`Address.Street`、`Address.Number`、`Addr.dist`、`Addr.strt`、`Addr.nmbr`
   * 不屬於任何行政區的建築物會被歸類為「（未建制地區）」，沒有門牌號碼的建築預設為 0 號。
 
 #### 面積 Area
@@ -232,7 +241,8 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 * 欄位類型：複合（浮點數）
 * 說明：區域的中心座標。
   * 此欄位為**複合欄位**，輸出後會變成三個欄位：
-    * GeoJSON、Shapefile：`Area.x`（X 座標）、`Area.y`（Y 座標）、`Area.z`（Z 座標）
+    * GeoJSON、Shapefile：`Center_x`（X 座標）、`Center_y`（Y 座標）、`Center_z`（Z 座標）
+    * 在 0.2.5 更新以前，這些欄位分別為：`Center.x`、`Center.y`、`Center.z`
   * 此欄位輸出的坐標為遊戲內的坐標系，原點位於地圖中心。
 
 #### 顏色 Color
@@ -479,7 +489,13 @@ Carto 提供兩種類別的欄位，分別是「空間」與「非空間」兩�
 
 ## 更新日誌
 
+### 0.2.5
+
+* 修正 ArcGIS 無法讀取包含句點（.）欄位檔案的問題，現在這些欄位的分隔符號被替換為底線（_）。［由 [load-ing](https://forum.paradoxplaza.com/forum/members/load-ing.1818892/) 回報］
+* 新增兩個可用於自訂名稱格式的變數：{Date} 和 {Time} ；前者表示遊戲內日期，後者表示遊戲內時間。
+
 ### 0.2.4
+
 * 修正網路圖徵的邊緣欄位無法被 ArcGIS 等軟體讀取的問題。［由 [Cities Skylines 光光](https://www.youtube.com/@CS_LightLight) 回報］
 * 修正部分小徑末端連接道路處的鋸齒。
 * 嘗試修正網路圖徵的邊緣欄位輸出含有無效多邊形的錯誤，當道路以極其尖銳的角度相連的情況下，仍有可能產生微型（< 1公尺）的自我相交（Self-intersection）錯誤。

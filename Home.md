@@ -1,6 +1,6 @@
-This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.2.4**.
+This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.2.5**.
 
-這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.4**。
+這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.5**。
 
 ### Installation
 
@@ -47,7 +47,15 @@ The next option is the **naming format** of the file, and the default option is 
 
 ![Custom file name format input box](src/Carto-General-Custom-Format.png)
 
-You can use **tokens** in the “Custom Name” input box to display several parameters of the save: `{Feature}` represents the feature type, `{City}` represents the name of the city, and `{Map}` represents the name of the map. For example, you can use the format `{Map}-{City}-{Feature}` to obtain files with names like `My Map-My City-Area.shp` or `My Map-My City-Building.json`.
+You can use **tokens** in the “Custom Name” input box to display several save parameters. Here is the list of available tokens:
+
+| Token | Description | Example |
+| ----- | ----------- | ------- |
+| `{Feature}` | The feature type. | `Area` |
+| `{City}`    | The name of the city. | `My City` |
+| `{Map}`     | The name of the map. | `My Map` |
+| `{Date}`    | The in-game date that follows [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. | `2027-04` |
+| `{Time}`    | The in-game time using `HHmm` format. | `1200` |
 
 The **latitude** and the **longitude** options are the highlight: Carto can project your city to most places on Earth as long as you provide a valid coordinate. You can use online map services like Google Maps to retrieve the coordinates of your target location, as shown in the image below. Of course, if there are no places you particularly want to project to, you can set both of them to zero.
 
@@ -154,8 +162,9 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 * Data Type: Composite (String, Integer)
 * Description: The in-game building identifier.
   * This field is a **composite field**. Three fields will be exported:
-    * GeoJSON: `Address.District`, `Address.Street` & `Address.Number`.
-    * Shapefile: `Addr.dist`, `Addr.strt` & `Addr.nmbr`.
+    * GeoJSON: `Address_District`, `Address_Street` & `Address_Number`.
+    * Shapefile: `Addr_dist`, `Addr_strt` & `Addr_nmbr`.
+    * Before 0.2.5 update, these fields had different names: `Address.District`, `Address.Street`, `Address.Number`, `Addr.dist`, `Addr.strt` & `Addr.nmbr`.
   * The buildings will be classified as “(Unincorporated Area)” if they do not belong to any districts. The buildings without a house number will receive the default number, 0.
 
 #### Area
@@ -232,7 +241,8 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 * Data Type: Composite (Float)
 * Description: The center coordinate of the area.
   * This field is a **composite field**. Three fields will be exported:
-    * GeoJSON、Shapefile: `Area.x`, `Area.y` & `Area.z`.
+    * GeoJSON & Shapefile: `Center_x`, `Center_y` & `Center_z`.
+    * Before 0.2.5 update, these fields had different names: `Center.x`, `Center.y` & `Center.z`.
   * The coordinate exported is the in-game coordinates, where the origin is the map center.
 
 #### Color
@@ -476,6 +486,11 @@ Sure, here are some of the examples you can made with Carto:
 *This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process.*
 
 ## Changelog
+
+### 0.2.5
+
+* Fixed the issue where ArcGIS Pro could not read files containing periods (.) in the field titles. The separators for these fields are now replaced with underscores (_). [Reported by [load-ing](https://forum.paradoxplaza.com/forum/members/load-ing.1818892/)]
+* Added two new tokens to use in the Custom Name field: {Date} & {Time}. The former represents the in-game date, and the latter represents the in-game time.
 
 ### 0.2.4
 
