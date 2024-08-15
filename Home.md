@@ -4,7 +4,7 @@ This is the homepage of Carto’s user manual; Please refer to each chapters to 
 
 ### Installation
 
-You can add the mod on Paradox Mods, which is the only official distribution channel. Once you launch the game, the mod should be loaded to your device.
+You can add the mod on [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the only official distribution channel. Once you launch the game, the mod should be loaded to your device.
 
 ### Chapters
 
@@ -18,7 +18,7 @@ You can add the mod on Paradox Mods, which is the only official distribution cha
 
 You can reach me at the PDX forum’s comment section, Cities: Skylines Modding Discord server, or Cities: Skylines Taiwan Assets Discord server. If you need to start a more in-depth discussion or report complicated bugs, I’d suggest using GitHub’s issues or discussions, as it isn’t easy to track them between threads.
 
-* 🌐 [Paradox Forum](about:blank)
+* 🌐 [Paradox Forum](https://forum.paradoxplaza.com/forum/threads/carto.1699089/)
 * 🛜 [Cities: Skylines Modding](https://discord.gg/HTav7ARPs2) - *English ONLY*
 * 🛜 [Cities: Skylines Taiwan Assets](https://discord.gg/Gz4K66jT64) - *Chinese preferred*
 * 📧 [4alpelna4lve@gmail.com](mailto:4alpelna4lve@gmail.com)

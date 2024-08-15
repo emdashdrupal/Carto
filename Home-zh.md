@@ -4,7 +4,7 @@ This is the homepage of Carto’s user manual; please visit [[English version|Ho
 
 ### 安裝
 
-你可以在 Paradox Mods，唯一的正式發佈管道上新增至遊玩集（Playset）或直接下載 Carto。當你啟動遊戲時，模組應該會被添加並載入至遊戲內。
+你可以在 [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows)，唯一的正式發佈管道上新增至遊玩集（Playset）或直接下載 Carto。當你啟動遊戲時，模組應該會被添加並載入至遊戲內。
 
 ### 章節
 
@@ -18,7 +18,7 @@ This is the homepage of Carto’s user manual; please visit [[English version|Ho
 
 你可以從 PDX 論壇的留言區、Cities: Skylines Modding Discord 伺服器與 Cities: Skylines Taiwan Assets Discord 伺服器聯繫我。若你想要開啟更深度的討論，或回報複雜的程式錯誤，我會建議你使用 GitHub 的議題區（Issue）或討論區（Discussion），這樣我能夠比較容易追蹤進度。
 
-* 🌐 [Paradox 論壇](about:blank)
+* 🌐 [Paradox 論壇](https://forum.paradoxplaza.com/forum/threads/carto.1699089/)
 * 🛜 [Cities: Skylines Modding](https://discord.gg/HTav7ARPs2)－<u>僅限</u>英文
 * 🛜 [Cities: Skylines Taiwan Assets](https://discord.gg/Gz4K66jT64)－中文為主
 * 📧 [4alpelna4lve@gmail.com](mailto:4alpelna4lve@gmail.com)
