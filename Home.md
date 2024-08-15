@@ -1,6 +1,6 @@
-This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.2.2**.
+This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.2.4**.
 
-這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.3**。
+這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.4**。
 
 ### Installation
 
