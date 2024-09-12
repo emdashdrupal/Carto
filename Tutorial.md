@@ -9,11 +9,11 @@ This is the step-by-step tutorial of using Carto & QGIS to make a beautiful map 
 You can add the mod to your current playlist by searching “Carto” on the [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows) in-game or online (you have to log-in your Paradox account first); there’s a khaki-ish map image with the white background on the icon. After the mod is added, it is required to restart the game.
 
 > **Figure 1** <br />
-> *Click the “Add to Active Playset” button to add Carto to your game.*
+> *Click the “Add to Active Playset” button to add Carto to your game.*<a id="Figure1"></a>
 > ![Carto’s Paradox Mods page](src/Tutorial-PDX-Mods.png)
 
 > **Figure 2** <br />
-> *Restart the game after adding Carto.*
+> *Restart the game after adding Carto.*<a id="Figure2"></a>
 > ![Game’s main menu with a notification saying that restarting the game is required](src/Tutorial-RestartGame.png)
 
 ### Exporting
@@ -21,23 +21,79 @@ You can add the mod to your current playlist by searching “Carto” on the [Pa
 Next, open the save you want to export when the game is ready. After the game finishes loading your save, click on the button with a gear icon (⚙️) on the top-right corner of the screen and then the button labeled as “Options”. Navigate to the option called “Carto” in the left sidebar.
 
 > **Figure 3** <br />
-> *Navigate to Carto’s options.*
+> *Navigate to Carto’s options.*<a id="Figure3"></a>
 > ![Navigating to Carto’s options from your game](src/Tutorial-LoadedPauseMenu.png)
 
-There many options you can configurate, but for now we will leave them as they are. (If you added the mod before the version 0.3, you shall reset your settings as there are some modifications on the default exporting fields, which will be used later in this tutorial) We only care about two options in this tutorial: the “Exported File Format” dropdown and the “Export” button. Please select the option “Shapefile” in the dropdown, and then hit the “Export” button. The export may take up to a minute, depending on your city size. After the export finishes, a dialog would inform you the export was successful. With the dropdown value set to “GeoTIFF”, please click the “Export” button again and wait until the export ended.
+There are many options you can configurate, but for now we will leave them as they are (If you added the mod before the version 0.3, you shall reset your settings as there are some modifications on the default exporting fields, which will be used later in this tutorial). We only care about two options in this tutorial: the “Exported File Format” dropdown and the “Export” button. Please select the option “Shapefile” in the dropdown, and then hit the “Export” button. The export may take up to a minute, depending on your city size. After the export finishes, a dialog would inform you the export was successful. With the dropdown value set to “GeoTIFF”, please click the “Export” button again and wait until the export ended.
 
 > **Figure 4** <br />
-> *Steps to export the files.*
+> *Steps to export the files.*<a id="Figure4"></a>
 > ![Export your city as Shapefiles and GeoTIFFs](src/Tutorial-Export.png)
 
 Lastly, you can click the “Open Export Directory” button to reveal the location of the exported files (default to be `C:\Users\<UserName>\AppData\LocalLow\Colossal Order\Cities Skylines II\ModsData\Carto`), which will be used in QGIS soon.
 
 > **Figure 5** <br />
-> *The export directory revealed in the File Explorer.*
+> *The export directory revealed in the File Explorer.*<a id="Figure5"></a>
 > ![The export directory revealed in the File Explorer](src/Tutorial-Files.png)
 
 ## Part II: QGIS
 
 ### Download & Installation
 
-You can visit [QGIS’s official website](https://www.qgis.org/download/) to obtain the binary installer. In order to complete the tutorial, you shall install the version no prior than 3.28 'Firenze', and I recommend you to download the latest long term release (LTR) version, which is more stable (As of September 2024, the LTR version is 3.34 'Prizren'). After you download the installer, you can install the program by following the install wizard’s instruction. If you encounter any problem when downloading / installing QGIS, please refer to the article provided by QGIS: [FAQ](https://www.qgis.org/resources/support/faq/) & [Installation Guide](https://www.qgis.org/resources/installation-guide/).
+You can visit [QGIS’s official website](https://www.qgis.org/) to obtain the binary installer. In order to complete the tutorial, you shall install the version no prior than 3.28 'Firenze', and I recommend you to download the latest long term release (LTR) version, which is more stable (As of September 2024, the LTR version is 3.34 'Prizren'; theoretically any 3.x version *may* be fine, but I haven’t check the version prior than 3.28). After you download the installer, you can install the program by following the install wizard’s instruction. If you encounter any problem when downloading / installing QGIS, please refer to the article provided by QGIS: [FAQ](https://www.qgis.org/resources/support/faq/) & [Installation Guide](https://www.qgis.org/resources/installation-guide/).
+
+> **Figure 6** <br />
+> *Downloading QGIS.*<a id="Figure6"></a>
+> ![The steps to download QGIS](src/Tutorial-QGISDownload.png)
+
+### Adding Layers
+
+You can launch your QGIS after the installation; the executable is located in `C:\Program Files\QGIS <Version Number>\bin\qgis-ltr-bin.exe` by default. When the QGIS is ready, click on the “Project” button on the top-left corner, and then select the “New” option. In this way, we have created the workspace (‘project’) where we can work on later. Next, navigate to and click on the “Layer” button in the top most menu, and then select “Add Layer” and “Add Vector Layer...” options. The Data Source Manager window will show up and ask you to provide the link to the vector source. Click on the button with three dots (ellipsis), and then navigate to [Carto’s ModsData folder](#Figure5). Please select all files with the extension `.shp` in the Shapefile folder (`Area.shp`, `Building.shp`, `Net_CenterLine.shp`, `Net_Edge.shp`, `POI.shp` & `Zoning.shp`), and then click “Open”, “Add” & “Close” buttons in order. There should be six layers in your workspace now; don’t worry about the color differences, as they are randomly generated by QGIS.
+
+> **Figure 7** <br />
+> *The default interface of QGIS after startup.*<a id="Figure7"></a>
+> ![The default interface of QGIS after startup](src/Tutorial-QGISDefault.png)
+
+> **Figure 8** <br />
+> *Creating a new QGIS project.*<a id="Figure8"></a>
+> ![Creating new QGIS project](src/Tutorial-QGISNewProject.png)
+
+> **Figure 9** <br />
+> *Adding vector layers. (1/2)*<a id="Figure9"></a>
+> ![Adding vector layers (1/2)](src/Tutorial-QGISAddVectorA.png)
+
+> **Figure 10** <br />
+> *Adding vector layers. (2/2)*<a id="Figure10"></a>
+> ![Adding vector layers (2/2)](src/Tutorial-QGISAddVectorB.png)
+
+> **Figure 11** <br />
+> *The workspace after adding vector layers. It is normal that your colors are different from mine.*<a id="Figure11"></a>
+> ![The workspace after adding vector layers](src/Tutorial-QGISAddVectorFinish.png)
+
+Now we want to add raster layers. Navigate to and click on the “Layer” button in the top most menu, and then select “Add Layer” and “Add Raster Layer...” options. Again, the Data Source Manager window will pop up and ask for the link to the dataset, and please select all files with the extension `.tif` in the GeoTIFF folder (`Terrain.tif` & `Water.tif`) this time. There are eight layers in the workspace in total after you added the files; remember to save the project by navigating to the “Project” > “Save” option or clicking on the floppy disk / save icon.
+
+> **Figure 12** <br />
+> *The workspace after adding raster layers.*<a id="Figure12"></a>
+> ![The workspace after adding raster layers](src/Tutorial-QGISAddRasterFinish.png)
+
+### Styling Layers
+
+Before stying the map, you have to re-arrange the layer order first. You can achieve this by clicking and dragging the layer titles that appear in the bottom-left “Layers” panel. In this tutorial, the recommended layer order from the top to the bottom is: *POI*, *Area*, *Net_CenterLine*, *Net_Edge*, *Building*, *Zoning*, *Water*, and *Terrain*.
+
+> **Figure 13** <br />
+> *The workspace after layer re-arrangements.*<a id="Figure13"></a>
+> ![The workspace after layer re-arrangements](src/Tutorial-QGISLayerOrder.png)
+
+Carto currently provides three style presets (Plan, Street & Topo). You can check their appearances in the images below:
+
+> **Figure 14** <br />
+> *Plan - A style featuring white background and greyscale palette, making it easy to plan your city ahead.*<a id="Figure14"></a>
+> ![Carto built-in Plan style](src/Tutorial-QGISStylePlan.png)
+
+> **Figure 15** <br />
+> *Street - A style featuring colorful roads and POIs, showing lively details.*<a id="Figure15"></a>
+> ![Carto built-in Street style](src/Tutorial-QGISStyleStreet.png)
+
+> **Figure 16** <br />
+> *Topo - A style featuring background with lower saturation and less POI information, making it a good background map.*<a id="Figure16"></a>
+> ![Carto built-in Topo style](src/Tutorial-QGISStyleTopo.png)
