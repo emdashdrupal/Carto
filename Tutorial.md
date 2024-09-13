@@ -40,7 +40,7 @@ Lastly, you can click the “Open Export Directory” button to reveal the locat
 
 ### Download & Installation
 
-You can visit [QGIS’s official website](https://www.qgis.org/) to obtain the binary installer. In order to complete the tutorial, you shall install the version no prior than 3.28 'Firenze', and I recommend you to download the latest long term release (LTR) version, which is more stable (As of September 2024, the LTR version is 3.34 'Prizren'; theoretically any 3.x version *may* be fine, but I haven’t check the version prior than 3.28). After you download the installer, you can install the program by following the install wizard’s instruction. If you encounter any problem when downloading / installing QGIS, please refer to the article provided by QGIS: [FAQ](https://www.qgis.org/resources/support/faq/) & [Installation Guide](https://www.qgis.org/resources/installation-guide/).
+You can visit [QGIS’s official website](https://www.qgis.org/) to obtain the binary installer. In order to complete the tutorial, you shall install the version no prior than 3.28 'Firenze', and I recommend you to download the latest long term release (LTR) version, which is more stable (As of September 2024, the LTR version is 3.34 'Prizren'; theoretically any 3.x version *may* be fine, but I haven’t check the versions prior than 3.28). After you download the installer, you can install the program by following the install wizard’s instruction. If you encounter any problem when downloading / installing QGIS, please refer to the article provided by QGIS: [FAQ](https://www.qgis.org/resources/support/faq/) & [Installation Guide](https://www.qgis.org/resources/installation-guide/).
 
 > **Figure 6** <br />
 > *Downloading QGIS.*<a id="Figure6"></a>
@@ -78,7 +78,7 @@ Now we want to add raster layers. Navigate to and click on the “Layer” butto
 
 ### Styling Layers
 
-Before stying the map, you have to re-arrange the layer order first. You can achieve this by clicking and dragging the layer titles that appear in the bottom-left “Layers” panel. In this tutorial, the recommended layer order from the top to the bottom is: *POI*, *Area*, *Net_CenterLine*, *Net_Edge*, *Building*, *Zoning*, *Water*, and *Terrain*.
+Before stying the map, you have to re-arrange the layer order first. You can achieve this by clicking and dragging the layer titles that appear in the bottom-left Layers panel. In this tutorial, the recommended layer order from the top to the bottom is: *POI*, *Area*, *Net_CenterLine*, *Net_Edge*, *Building*, *Zoning*, *Water*, and *Terrain*.
 
 > **Figure 13** <br />
 > *The workspace after layer re-arrangements.*<a id="Figure13"></a>
@@ -97,3 +97,100 @@ Carto currently provides three style presets (Plan, Street & Topo). You can chec
 > **Figure 16** <br />
 > *Topo - A style featuring background with lower saturation and less POI information, making it a good background map.*<a id="Figure16"></a>
 > ![Carto built-in Topo style](src/Tutorial-QGISStyleTopo.png)
+
+To apply style presets on the layers, please right click on the layer name in the layer panel, and then select “Properties...” option at the bottom of the menu. The Layer Properties window will appear after you select the option. Next, left click on the “Style” button at the bottom edge of the window, and then select the “Load Style...” option. In this way, the second window called Database Styles Manager will show up. Before you load the style, please make sure the (1) Symbology and (2) Labels checkboxes in the Categories section are ticked (note that raster layers only have the Symbology checkbox).
+
+> **Figure 17** <br />
+> *Steps to open Database Styles Manager window.*<a id="Figure17"></a>
+> ![Steps to open Database Styles Manager window](src/Tutorial-QGISLayerStyle.png)
+
+I’m using the Street style in this tutorial, but the steps are similar for other style presets. Click on the button with three dots (ellipsis), and then navigate to the Styles folder in Carto’s ModsData folder. Since the layer I clicked was POI, I will go to the folder with the name of my desirable style, which is `Street` in this case, and then choose the file `Street-POI-Location (Latin).qml`. Finally, you can click the “Open”, “Load Style” & “OK” buttons in order. The naming of style preset files generally follow the rule of `<StyleName>-<Feature>-<SpatialFieldName>.qml`; the table below shows the corresponding style preset files of each layer:
+
+> **Table 1** <br />
+> *The style presets for each feature type.*<a id="Table1"></a>
+> | Feature Type | Corresponding File Name              | Style with Script Suffixes | Notes |
+> | :----------: | ------------------------------------ | :------------------------: | ----- |
+> | Area         | \<StyleName\>-Area-Edge.qml          |                      *All* |       |
+> | Building     | \<StyleName\>-Building-Edge.qml      |                       Plan |       |
+> | Network      | \<StyleName\>-Network-Centerline-Labels.qml |               *All* |   (1) |
+> | -            | \<StyleName\>-Network-Centerline-Arrows.qml |                     |   (2) |
+> | -            | \<StyleName\>-Network-Edge.qml       |                            |       |
+> | POI          | \<StyleName\>-POI-Location.qml       |              Street & Topo |       |
+> | Terrain      | \<StyleName\>-Terrain-Elevation.qml  |                            |       |
+> | Water        | \<StyleName\>-Water-Depth.qml        |                            |       |
+> | Zoning       | \<StyleName\>-Zoning-Edge.qml        |                            |   (3) |
+>
+> *Notes*:<br />
+> (1) The labels for roads.<br />
+> (2) The direction arrows for roads.<br />
+> (3) Suffix `(By Color)` - use Color field’s value; `(By Zoning)` - use Zoning field’s value.
+
+Repeat the instructions described above for every layers, and you should get something similar to the image below. Don’t forget to save your project!
+
+> **Figure 18** <br />
+> *The worksapce after loading styles for every layers.*<a id="Figure18"></a>
+> ![The worksapce after loading styles for every layers](src/Tutorial-QGISStylingFinish.png)
+
+### Frequently Used QGIS Operations
+
+#### Panning and Zooming the Map
+
+Firstly, please make sure that you are enabling the “Pan Map” mode — You can found the button in the top toolbar, which features a glove or a raised hand (🤚) (Or go to View > Pan Map). Move your mouse to the canvas; left-click and hold, and drag the mouse in any direction to pan the map. To zoom in/out the map, scroll your mouse wheel forward/backward.
+
+*Related QGIS documentation: [Navigating the Map Canvas](https://docs.qgis.org/3.34/en/docs/training_manual/basic_map/mapviewnavigation.html)*
+
+#### Zooming Back After Getting Lost
+
+Left-click on the “Zoom Full” button in the top toolbar, which features a magnifier and three out-going arrows (🔎 + ↖ + ↗ + ↘), to zoom back to the project’s canvas extent.
+
+*Related QGIS documentation: [Exploring the map view](https://docs.qgis.org/3.34/en/docs/user_manual/map_views/map_view.html#exploring-the-map-view)*
+
+#### Hide or Unhide the Layers
+
+Left-click on the checkbox next to the layer’s name to hide/unhide the layer in the Layers panel. Alternatively, you can left-click on the layer’s name, and then left-click on the “Manage Map Themes” button in the toolbar of the Layer panel, which features an opened eye (👁️). You can select the relevant options including “Show All Layers,” “Hide All Layers,” “Show Selected Layers,” “Hide Selected Layers,” and “Toggle Selected Layers” in the menu.
+
+*Related QGIS documentation: [Configuring map themes](https://docs.qgis.org/3.34/en/docs/user_manual/introduction/general_tools.html#configuring-map-themes)*
+
+#### Hide or Unhide the Labels
+
+Sometimes you may want to toggle the labels to see the details underneath the text. You can achieve this by right-clicking on the layer’s name in the Layers panel, and then toggle the “Show Labels” option in the menu.
+
+*Related QGIS documentation: [Overview of the context menu of the Layers panel](https://docs.qgis.org/3.34/en/docs/user_manual/introduction/general_tools.html#overview-of-the-context-menu-of-the-layers-panel)*
+
+#### Adding External Maps
+
+To add external maps like Google Maps or OpenStreetMap as the background in the canvas, navigate to the “XYZ Tiles” option in the Browser panel, which is on the left of the screen. You can left-click on the triangle (▸) next to the icon to reveal its content; you can double-left-click on the “OpenStreetMap” option to add it to the canvas. Remember to adjust the order of the layers so that your city’s map is on top of the background layer. To add Google Maps to your map, right-click on the “XYZ Tiles” option, and then select the “New Connection...” option. The XYZ Connection window will appear, where you can type in the desired connection name (e.g. *Google Maps*) and the URL to Google’s XYZ Tile server: `http://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}`. Click on the “OK” button when you are finished, and then double-left-click the connection you just created to add it to the map.
+
+*Related QGIS documentation: [Using XYZ Tile services](https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#using-xyz-tile-services)*
+
+> **Figure 19** <br />
+> *Adding new XYZ Tile connection.*<a id="Figure19"></a>
+> ![Adding new XYZ Tile connection](src/Tutorial-QGISConnectionXYZ.png)
+
+#### Showing the Hidden Panels
+
+If you accidentally close the panels, you can show them by right-clicking on any empty space of the toolbars on the top (or going to View > Panels) and then selecting the panels you need in the menu.
+
+*Related QGIS documentation: [Panels](https://docs.qgis.org/3.34/en/docs/user_manual/introduction/general_tools.html#panels)*
+
+#### Customizing the Symbology and the Labels of the Layers
+
+To change the map’s appearance on demand, you can customize the style of the layers by yourself. Right-click on the layer’s name in the Layers panel, then select the “Properties...” option to show the Layer Properties window (or press F7 to show the Layer Styling panel). You can navigate to the Symbology tab or Labels tab to customize further based on Carto’s presets. You can find more tutorial and information on styling in QGIS’s documentation.
+
+*Related QGIS documentation:*<br />
+&emsp;*Training Manual (Easy - Moderate) - [Lesson: Symbology](https://docs.qgis.org/3.34/en/docs/training_manual/basic_map/symbology.html) and [Lesson: Labels](https://docs.qgis.org/3.34/en/docs/training_manual/vector_classification/label_tool.html)*<br />
+&emsp;*User Manual (Moderate - Advanced) - [Vector Symbology Properties](https://docs.qgis.org/3.34/en/docs/user_manual/working_with_vector/vector_properties.html#symbology-properties), [Vector Labels Properties](https://docs.qgis.org/3.34/en/docs/user_manual/working_with_vector/vector_properties.html#labels-properties) and [Raster Symbology Properties](https://docs.qgis.org/3.34/en/docs/user_manual/working_with_raster/raster_properties.html#symbology-properties)*
+
+#### Other Operations
+
+Please refer to the official [QGIS documentation website](https://docs.qgis.org/3.34/en/docs/index.html) to acquire the instructions for other operations.
+
+### Exporting Maps
+
+After playing around with the settings, you may be happy with your current settings and want to export the map as images or PDFs. The simplist way is selecting “Project”, “Import/Export”, and “Export Map to Image...” (or “Export Map to PDF...”) options in order in the top menu bar. All you need to do is clicking on the “Save” button in the Save Map as Image window, and give your file a name. However, this method only exports the extent within your current canvas\*, and you can’t reuse the settings conveniently.
+
+\* In fact, you *can* alter the extent settings in the Save Map as Image window, but I consider it more intuitive to do it in the Layout editor.
+
+> **Figure 20** <br />
+> *Express map exporting through the Project option.*<a id="Figure20"></a>
+> ![Express map exporting through the Project option](src/Tutorial-QGISExportExpress.png)
