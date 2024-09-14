@@ -70,7 +70,7 @@ You can launch your QGIS after the installation; the executable is located in `C
 > *The workspace after adding vector layers. It is normal that your colors are different from mine.*<a id="Figure11"></a>
 > ![The workspace after adding vector layers](src/Tutorial-QGISAddVectorFinish.png)
 
-Now we want to add raster layers. Navigate to and click on the “Layer” button in the top most menu, and then select “Add Layer” and “Add Raster Layer...” options. Again, the Data Source Manager window will pop up and ask for the link to the dataset, and please select all files with the extension `.tif` in the GeoTIFF folder (`Terrain.tif` & `Water.tif`) this time. There are eight layers in the workspace in total after you added the files; remember to save the project by navigating to the “Project” > “Save” option or clicking on the floppy disk / save icon.
+Now we want to add raster layers. Navigate to and click on the “Layer” button in the top most menu, and then select “Add Layer” and “Add Raster Layer...” options. Again, the Data Source Manager window will pop up and ask for the link to the dataset, and please select all files with the extension `.tif` in the GeoTIFF folder (`Terrain.tif` & `Water.tif`) this time. There are eight layers in the workspace in total after you added the files; remember to save the project by navigating to the “Project” > “Save” option or clicking on the floppy disk / save icon (💾).
 
 > **Figure 12** <br />
 > *The workspace after adding raster layers.*<a id="Figure12"></a>
@@ -98,7 +98,7 @@ Carto currently provides three style presets (Plan, Street & Topo). You can chec
 > *Topo - A style featuring background with lower saturation and less POI information, making it a good background map.*<a id="Figure16"></a>
 > ![Carto built-in Topo style](src/Tutorial-QGISStyleTopo.png)
 
-To apply style presets on the layers, please right click on the layer name in the layer panel, and then select “Properties...” option at the bottom of the menu. The Layer Properties window will appear after you select the option. Next, left click on the “Style” button at the bottom edge of the window, and then select the “Load Style...” option. In this way, the second window called Database Styles Manager will show up. Before you load the style, please make sure the (1) Symbology and (2) Labels checkboxes in the Categories section are ticked (note that raster layers only have the Symbology checkbox).
+To apply style presets on the layers, please right click on the layer name in the Layers panel, and then select “Properties...” option at the bottom of the menu. The Layer Properties window will appear after you select the option. Next, left click on the “Style” button at the bottom edge of the window, and then select the “Load Style...” option. In this way, the second window called Database Styles Manager will show up. Before you load the style, please make sure the (1) Symbology and (2) Labels checkboxes in the Categories section are ticked (note that raster layers only have the Symbology checkbox).
 
 > **Figure 17** <br />
 > *Steps to open Database Styles Manager window.*<a id="Figure17"></a>
@@ -116,14 +116,15 @@ I’m using the Street style in this tutorial, but the steps are similar for oth
 > | -            | \<StyleName\>-Network-Centerline-Arrows.qml |                     |   (2) |
 > | -            | \<StyleName\>-Network-Edge.qml       |                            |       |
 > | POI          | \<StyleName\>-POI-Location.qml       |              Street & Topo |       |
-> | Terrain      | \<StyleName\>-Terrain-Elevation.qml  |                            |       |
+> | Terrain      | \<StyleName\>-Terrain-Elevation.qml  |                            |   (3) |
 > | Water        | \<StyleName\>-Water-Depth.qml        |                            |       |
-> | Zoning       | \<StyleName\>-Zoning-Edge.qml        |                            |   (3) |
+> | Zoning       | \<StyleName\>-Zoning-Edge.qml        |                            |   (4) |
 >
 > *Notes*:<br />
 > (1) The labels for roads.<br />
 > (2) The direction arrows for roads.<br />
-> (3) Suffix `(By Color)` - use Color field’s value; `(By Zoning)` - use Zoning field’s value.
+> (3) Topo only: Suffix `-Background` - background color; `-Contours` - the contours; `-Hillshade` - the hill shades.<br />
+> (4) Suffix `(By Color)` - use Color field’s value; `(By Zoning)` - use Zoning field’s value.
 
 Repeat the instructions described above for every layers, and you should get something similar to the image below. Don’t forget to save your project!
 
@@ -194,3 +195,19 @@ After playing around with the settings, you may be happy with your current setti
 > **Figure 20** <br />
 > *Express map exporting through the Project option.*<a id="Figure20"></a>
 > ![Express map exporting through the Project option](src/Tutorial-QGISExportExpress.png)
+
+The formal way to export your map is using the print layouts, which are highly customizable and reusable. To create a new print layout, select “Project” and “New Print Layout...” option (or click on the “New Print Layout” button next to the “Save Project” button, which features a sheet of paper with a ruler and a yellow asterik (📄 + 📏 + \*)). After naming the new layout and pressing “OK” button, a new layout editor with the name you just typed will pop up.
+
+> **Figure 21** <br />
+> *Creating a new layout.*<a id="Figure21"></a>
+> ![Creating a new layout](src/Tutorial-QGISCreateLayout.png)
+
+In the window, you can configure the print layout settings. Press V, left-click on the white canvas and then select the “Item Properties” tab in the right panel. The canvas (export extent) properties can be set in the panel. To add a map to your canvas, click on the “Add Map” button in the left toolbar, and then drag a suitable size rectangle on the canvas. The map should be rendered soon; to pan and zoom the map content, click on the “Move item content” button in the left toolbar (or press C), and then you can manipulate the map contents as you did in the main QGIS window. Last, you can click the “Export as Image” and “Export as PDF” buttons in the top toolbar to export your city’s map. For further information on styling the print layouts, please refer to QGIS’s documentation.
+
+*Related QGIS documentation: [Using Print Layout](https://docs.qgis.org/3.34/en/docs/training_manual/map_composer/map_composer.html) and [Laying out the maps](https://docs.qgis.org/3.34/en/docs/user_manual/print_composer/index.html)*
+
+> **Figure 22** <br />
+> *The default appearance of the layout editor and frequently used tools.*<a id="Figure22"></a>
+> ![The default appearance of layout editor and frequently used tools](src/Tutorial-QGISDefaultLayout.png)
+
+Tah-dah! This ends our tutorial on how to make your city’s map with Carto and QGIS. If you have any question regarding the tutorial or the mod, feel free to contact me through the [Discussions](https://github.com/taipei-native/Carto/discussions), [Paradox Forum](https://forum.paradoxplaza.com/forum/threads/carto.1699089/), [Cities: Skylines Modding](https://discord.gg/HTav7ARPs2) Discord Server (English ONLY), [Cities: Skylines Taiwan Assets](https://discord.gg/Gz4K66jT64) Discord Server (Chinese Prefered), or [Email](mailto:4alpelna4lve@gmail.com). Thank you for adding Carto and finishing reading the tutorial ヾ(*´∀ ˋ*)ﾉ
