@@ -1,6 +1,10 @@
-This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.2.5**.
+This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.3**.
 
-這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.2.5**。
+這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.3**。
+
+### Tutorial
+
+Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit the tutorial here|Tutorial]].
 
 ### Installation
 
@@ -35,11 +39,11 @@ The first interface that comes into your view is the General Tab. Here you can s
 
 | File Format | Extension | Category | Supported Feature Types | Description |
 | ----------- | --------- | ---------| ----------------------- | ------------|
-| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, Zoning | The format is simple and lightweight and can be edited using a general text editor. It is suitable for the storage and the exchange of small amounts of data, but lacking indexing on each feature results in low search and rendering efficiency. |
-| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, Zoning | The format is not easy to edit as it is encoded in binary format, and reading such format requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed. |
+| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI & Zoning | The format is simple and lightweight and can be edited using a general text editor. It is suitable for the storage and the exchange of small amounts of data, but lacking indexing on each feature results in low search and rendering efficiency. |
+| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI & Zoning | The format is not easy to edit as it is encoded in binary format, and reading such format requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed. |
 | GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This is the image format that stores sequential data into pixels. You can open the file with major media viewers (such as Microsoft Photos). |
 
-Simply put, if you want to export buildings, roads, tracks, pathways, district borders, map tile borders, or zoning cells, you should choose GeoJSON or Shapefile. Otherwise, if you want to export water bodies or terrain heights, GeoTIFF will be your only choice.
+Simply put, if you want to export buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells, you should choose GeoJSON or Shapefile. Otherwise, if you want to export water bodies or terrain heights, GeoTIFF will be your only choice.
 
 The next option is the **naming format** of the file, and the default option is the “Feature Type.” Other options include “City Name + Feature Type,” “Map Name + Feature Type,” and “Custom.” The first two add the map name and the city name in the current save respectively, such as `My City_Area.shp` or `My Map_Building.json`. The last one allows you to customize the file name, but you should be aware that only one file remains when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later.)
 
@@ -82,6 +86,7 @@ The second tab is the Custom Export Tab, where you can customize the contents an
 | Area         | Vector   | The boundaries of districts and map tiles | ![Districts](src/Carto-Area.png) |
 | Building     | Vector   | The collision area of buildings | ![Buildings](src/Carto-Building.png) |
 | Network      | Vector   | The centerline and the edge of roads, tracks, and pathways | ![Roads](src/Carto-Network.png) |
+| POI (Point of Interest) | Vector   | The location of the buildings or transportation stops’ markers | ![POIs](src/Carto-POI.png) |
 | Terrain      | Raster   | The terrain elevation | ![Terrain](src/Carto-Terrain.png) |
 | Water Bodies | Raster   | The water depths | ![Water Bodies](src/Carto-Water.png) |
 | Zoning       | Vector   | The zoning cells (small blocks) | ![Zonings](src/Carto-Zoning.png) |
@@ -102,7 +107,7 @@ Carto provides two types of fields, namely “spatial” and “non-spatial.” 
 
 ### Spatial Fields
 
-Carto currently supports 6 spatial fields.
+Carto currently supports 7 spatial fields.
 
 #### Centerline
 
@@ -121,7 +126,7 @@ Carto currently supports 6 spatial fields.
 #### Edge
 
 * Version: 0.1 +
-* Feature: `Area`、`Building`、`Network`、`Zoning`
+* Feature: `Area`, `Building`, `Network` & `Zoning`
 * Geometry: Vector (Polygons)
 * Description: The outline of the features.
   * For `Building` features, this represents **the collision area of the building**.
@@ -134,6 +139,13 @@ Carto currently supports 6 spatial fields.
 * Geometry: Raster (3.5m × 3.5m)
 * Description: The elevation of the terrain.
   * Note that this is **NOT** the distance between terrain and the sea level, but the distance between that and the in-game origin.
+
+#### Location
+
+* Version: 0.3 +
+* Feature: `POI`
+* Geometry: Vector (Points)
+* Description: The position of the feature.
 
 #### World Depth
 
@@ -158,7 +170,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Address
 
 * Verison: 0.2 +
-* Feature: `Building`
+* Feature: `Building` & `POI`
 * Data Type: Composite (String, Integer)
 * Description: The in-game building identifier.
   * This field is a **composite field**. Three fields will be exported:
@@ -177,7 +189,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Asset
 
 * Version: 0.1 +
-* Feature: `Building`、`Network`
+* Feature: `Building` & `Network`
 * Data Type: String
 * Description: The title of the asset.
 
@@ -191,47 +203,10 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Category
 
 * Version: 0.1 +
-* Feature: `Building`、`Network`
+* Feature: `Building`, `Network` & `POI`
 * Data Type: String
-* Description: The sub-division of the in-game objects。
-  * The category of buildings：
-    * `None`
-    * `Extension`
-    * `Construction`
-    * `Public`
-    * `Decoration`
-    * `Extractor`
-    * `Property`
-    * `Admin`
-    * `Communication`
-    * `Disaster`
-    * `Education`
-    * `Fire`
-    * `Health`
-    * `Maintenance`
-    * `Mortuary`
-    * `Park`
-    * `Parking`
-    * `Police`
-    * `Post`
-    * `Power`
-    * `Research`
-    * `Sewage`
-    * `Transportation`
-    * `Waste`
-    * `Water`
-
-  * The category of networks:
-    * `None` 
-    * `Small`
-    * `Medium`
-    * `Large`
-    * `Highway`
-    * `Train`
-    * `Subway`
-    * `Tram`
-    * `Pathway`
-
+* Description: The sub-division of the in-game objects.
+  * Please refer to the [[category list|Category]] for a detailed list of all possible values.
   * A feature can have multiple categories. For example, Incineration Plant has the category of `Public, Power, Waste`, and the Medium road with tram tracks has the category of `Medium, Tram`.
 
 #### Center
@@ -288,7 +263,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Employee
 
 * Version: 0.2 +
-* Feature: `Area`、`Building`
+* Feature: `Area` & `Building`
 * Data Type: Integer
 * Description: The number of employees in the area.
   * Carto doesn’t export employee count of each map tiles.
@@ -314,7 +289,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Household
 
 * Version: 0.2 +
-* Feature: `Area`、`Building`
+* Feature: `Area` & `Building`
 * Data Type: Integer
 * Description: The number of households in the area.
   * When the [Count Homeless Residents](#CountHomelessResidents) option is enabled, the homeless living in the park will be counted.
@@ -337,7 +312,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Name
 
 * Version: 0.1 +
-* Feature: `Area`、`Building`、`Network`、`Zoning`
+* Feature: `Area`, `Building`, `Network`, `POI` & `Zoning`
 * Data Type: String
 * Description: The name of the object.
   * This is a mandatory field, **you can’t export without this field**.
@@ -345,7 +320,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Object
 
 * Version: 0.1 +
-* Feature: `Area`、`Building`、`Network`、`Zoning`
+* Feature: `Area`, `Building`, `Network`, `POI` & `Zoning`
 * Data Type: String
 * Description: Carto's classification of the in-game objects.
   * All object types:
@@ -367,7 +342,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Resident
 
 * Version: 0.2 +
-* Feature: `Area`、`Building`
+* Feature: `Area` & `Building`
 * Data Type: Integer
 * Description: The number of residents in the area.
   * When the [Count Homeless Residents](#CountHomelessResidents) option is enabled, the homeless living in the park will be counted.
@@ -376,7 +351,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Theme
 
 * Version: 0.1.1 +
-* Feature: `Building`、`Zoning`
+* Feature: `Building` & `Zoning`
 * Data Type: String
 * Description: The style of the assets.
 
@@ -398,7 +373,7 @@ Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have n
 #### Zoning
 
 * Version: 0.2 +
-* Feature: `Building`、`Zoning`
+* Feature: `Building` & `Zoning`
 * Data Type: String
 * Description: The classification of designated development purposes.
   * All zoning types:
@@ -424,7 +399,11 @@ The last interface is the Miscellaneous Tab. The first option is the <a id="geot
 | Norm16 |16-bit Normalized Number| The option that normalizes Int16’s data. **This can be used as the heightmap in the map editor**. |
 | Float32|32-bit Float Number     | The option includes extra information in decimals, but **the file size is twice as big**. |
 
-The second option is the <a id="CountHomelessResidents"></a> **Count Homeless Residents** option. When enabled, the homeless that **live in the park** will be counted into corresponding fields. Here’s a table showing how Carto performs the census:
+The second option is the **POI Category Format** option. Users can select from two options: All and Single. The former exports all applicable categories of the POI, and the latter only exports the most applicable one; default to be All.
+
+The third option is the **Export Sub-Building Upgrades’ POIs** option. Users can decide whether to export sub-building upgrades as individual POIs or not; default to be false.
+
+The fourth option is the <a id="CountHomelessResidents"></a> **Count Homeless Residents** option. When enabled, the homeless that **live in the park** will be counted into corresponding fields. Here’s a table showing how Carto performs the census:
 
 | Field                | Normal Citizens | The Homeless                   | Foreigners (Tourist / Transit / Migrant Workers)| Description |
 | -------------------- | ----------------| -------------------------------|-------------------------------------------------|-------------|
@@ -433,15 +412,23 @@ The second option is the <a id="CountHomelessResidents"></a> **Count Homeless Re
 
 *Assumes the Count Homeless Residents option is enabled*
 
-The third option is the <a id="ExportUnzoned"></a> **Export Unzoned Zoning Cells** option. When enabled, Carto will export every zoning cells, even if they are not zoned (empty). Disable this option to reduce the file size.
+The fifth option is the <a id="ExportUnzoned"></a> **Export Unzoned Zoning Cells** option. When enabled, Carto will export every zoning cells, even if they are not zoned (empty). Disable this option to reduce the file size.
 
-The fourth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color Changer’s Color** option. This option will only appear when Carto detects that [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) mod is loaded. When enabled, the [Color](#color) field will be replaced by Zone Color Changer’s current settings.
+The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color Changer’s Color** option. This option will only appear when Carto detects that [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) mod is loaded. When enabled, the [Color](#color) field will be replaced by Zone Color Changer’s current settings.
 
 ![Use Zone Color Changer’s Color option](src/Carto-Misc-ZCC.png)
 
 ## Post-export: What’s Next?
 
 So after you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations:
+
+### Using GIS Software
+
+Carto recommends users use GIS software because it provides them with not only a powerful platform to view and edit the data but also a set of tools to perform in-depth geographical analysis. Here are some of the GIS software you can use:
+
+* [QGIS](https://www.qgis.org/) is a free and open-source software, and there are numerous QGIS plug-ins developed and maintained by volunteers. (Recommended)<br />
+  * Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit the tutorial here|Tutorial]].
+* [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is a paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from. (Recommended if you have a license)
 
 ### Using Online Viewers
 
@@ -451,13 +438,6 @@ For the users who want to visualize the exported files but don’t have access t
 * [geojson.io](https://geojson.io/) supports GeoJSON. You can edit the shape and change the color at the same time. (Recommended)
 * [Survey Transfer](https://app.surveytransfer.net/) supports GeoJSON, Shapefile, and GeoTIFF. The website requires you to register your account only with a 14-day free trial. (Not recommended)
 * [ArcGIS Online](https://maps.arcgis.com/apps/mapviewer/index.html) supports GeoJSON, Shapefile, and GeoTIFF. However, you have to purchase the license to access the features. (Not recommended if you don’t have a license.)
-
-### Using GIS Software
-
-Carto recommends users use GIS software because it provides them with not only a powerful platform to view and edit the data but also a set of tools to perform in-depth geographical analysis. Here are some of the GIS software you can use:
-
-* [QGIS](https://www.qgis.org/) is a free and open-source software, and there are numerous QGIS plug-ins developed and maintained by volunteers. (Recommended)
-* [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is a paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from. (Recommended if you have a license)
 
 ### Using Geospatial Libraries
 
@@ -475,7 +455,7 @@ Sure, here are some of the examples you can made with Carto:
 
 ![Classic Street Map](src/Carto-Example-1.png)
 
-*A classic street map using Area, Building, Network (Edge), Terrain, and Water Bodies features.*
+*A classic street map using Area, Building, Network (Edge), POIs, Terrain, and Water Bodies features.*
 
 ![Beverage Industry Map](src/Carto-Example-2.png)
 
@@ -486,6 +466,17 @@ Sure, here are some of the examples you can made with Carto:
 *This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process.*
 
 ## Changelog
+
+### 0.3
+
+* Now Carto can export points of interest (POIs).
+  * The POI feature has the following spatial field: <u>Location</u>.
+  * The POI feature has the following non-spatial fields: Address and Category.
+* Added POI Category Format option (Miscellaneous Tab > POI Category Format). Users can select from two options: All and Single. The former exports all applicable categories of the POI, and the latter only exports the most applicable one; default to be All.
+* Added Export Sub-Building Upgrades’ POIs option (Miscellaneous Tab > Export Sub-Building Upgrades’ POIs). Users can decide whether to export sub-building upgrades as individual POIs or not; default to be false.
+* Added three ready-to-use QGIS style presets (Plan, Street & Topo); they can be accessed in the directory `ModsData\Carto\Styles`.
+
+Note: <u>Underlined</u> fields are newly added.
 
 ### 0.2.5
 
