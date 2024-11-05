@@ -11,13 +11,13 @@
     "C:\\Users\\Daniel\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "0.3.0",
+    "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\source\\repos\\Carto\\Carto.csproj",
+      "projectUniqueName": "D:\\Documents\\[by-type]\\github\\Carto\\Carto.csproj",
       "projectName": "Carto",
-      "projectPath": "D:\\Documents\\source\\repos\\Carto\\Carto.csproj",
+      "projectPath": "D:\\Documents\\[by-type]\\github\\Carto\\Carto.csproj",
       "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\source\\repos\\Carto\\obj\\",
+      "outputPath": "D:\\Documents\\[by-type]\\github\\Carto\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",

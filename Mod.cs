@@ -1,75 +1,39 @@
-﻿namespace Carto
-{
-    using Carto.Systems;
-    using Carto.Utils;
-    using Colossal.IO.AssetDatabase;
-    using Game;
-    using Game.Modding;
-    using System.IO;
+﻿using Colossal.IO.AssetDatabase;
+using Colossal.Logging;
+using Game;
+using Game.Modding;
+using Game.SceneFlow;
 
-    /// <summary>
-    /// The mod instance using IMod interface.
-    /// （使用 IMod 介面的模組實例。）
-    /// </summary>
-    public sealed class Mod : IMod
+namespace Carto
+{
+    public class Mod : IMod
     {
-        /// <summary>
-        /// This event triggers when the mod instance is loaded.
-        /// （這是當模組實例載入完成時，會被觸發的事件。）
-        /// </summary>
-        /// <param name="updateSystem">
-        /// The system managing ingame status updates.
-        /// （管理遊戲內狀態更新的系統）
-        /// </param>
+        public static ILog log = LogManager.GetLogger($"{nameof(Carto)}.{nameof(Mod)}").SetShowsErrorsInUI(false);
+        private Setting m_Setting;
+
         public void OnLoad(UpdateSystem updateSystem)
         {
-            // Create the content folder.
-            // （創造內容資料夾。）
-            Directory.CreateDirectory(Setting.ContentFolder);
-            Directory.CreateDirectory(Setting.SettingFolder);
+            log.Info(nameof(OnLoad));
 
-            // Register settings in the options page.
-            // （將設定註冊在選項頁面。）
-            Instance.Settings = new Setting(this);
-            Instance.Settings.RegisterInOptionsUI();
-            AssetDatabase.global.LoadSettings(nameof(Carto), Instance.Settings, new Setting(this));
-            Instance.Settings.ValidateSettings();
-            Instance.Settings.LoadLocalSettings();
+            if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
+                log.Info($"Current mod asset at {asset.path}");
 
-            // Append locales to the existing ones.
-            // （將語系檔案添加至既有的檔案。）
-            LocaleUtils.BatchAddLocaleFromEmbedded();
+            m_Setting = new Setting(this);
+            m_Setting.RegisterInOptionsUI();
+            GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
 
-            // Extract the embedded QGIS styles.
-            //（擷取嵌入的 QGIS 樣式。）
-            MiscUtils.ExtractEmbeddedStyles(Path.Combine(Setting.ContentFolder, "Styles"));
 
-            // Register system instances into the game.
-            // （將系統實例註冊在遊戲中。）
-            updateSystem.UpdateBefore<AreaSystem>(SystemUpdatePhase.GameSimulation);
-            updateSystem.UpdateBefore<BuildingSystem>(SystemUpdatePhase.GameSimulation);
-            updateSystem.UpdateBefore<NetSystem>(SystemUpdatePhase.GameSimulation);
-            updateSystem.UpdateBefore<POISystem>(SystemUpdatePhase.GameSimulation);
-            updateSystem.UpdateBefore<TerrainSystem>(SystemUpdatePhase.GameSimulation);
-            updateSystem.UpdateBefore<WaterSystem>(SystemUpdatePhase.GameSimulation);
-            updateSystem.UpdateBefore<ZoningSystem>(SystemUpdatePhase.GameSimulation);
-
-            Instance.Log.Info("Mod instance loaded. 模組實例載入完成。");
+            AssetDatabase.global.LoadSettings(nameof(Carto), m_Setting, new Setting(this));
         }
 
-        /// <summary>
-        /// This event triggers when the mod instance is disposed of.
-        /// （這是當模組實例被銷毀時，會被觸發的事件。）
-        /// </summary>
         public void OnDispose()
         {
-            if (Instance.Settings != null)
+            log.Info(nameof(OnDispose));
+            if (m_Setting != null)
             {
-                Instance.Settings.UnregisterInOptionsUI();
-                Instance.Settings = null;
+                m_Setting.UnregisterInOptionsUI();
+                m_Setting = null;
             }
-
-            Instance.Log.Info("Mod instance is being disposed of. 模組實例正被銷毀。");
         }
     }
 }
