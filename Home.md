@@ -67,7 +67,7 @@ You can use *tokens* in the **Custom Name** field to display several save parame
 | `{Date}`    | The in-game date that follows [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. | `2027-04` |
 | `{Time}`    | The in-game time using `HHmm` format. | `1200` |
 
->{!IMPORTANT} Tokens are case-sensitive
+>[!IMPORTANT] Tokens are case-sensitive
 
 The **latitude** and the **longitude** options are the highlight: Carto can project your city to most places on Earth as long as you provide a valid coordinate. You can use online map services like Google Maps to retrieve the coordinates of your target location, as shown in the image below. Of course, if there are no places you particularly want to project to, you can set both of them to zero.
 
