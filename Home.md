@@ -4,9 +4,10 @@ See each [chapter](#chapters) for more information. **This manual is compatible 
 
 這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.3**。
 
-## Tutorial
+<!-- ## Tutorial
 
 Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit the tutorial here|Tutorial]].
+-->
 
 ## Installation
 
@@ -41,7 +42,8 @@ To open the Carto UI, Select **Options** (⚙️) &rarr; **Carto**. You can also
 
 The first interface that comes into your view is the General Tab. Here you can select the exported files’ format, naming conventions, the coordinates of the map center, etc.
 
-> **IMPORTANT**: The file format you select affects the variety of the items that can be exported. Here’s a table to help you choose from these formats.
+> [!IMPORTANT]
+> The file format you select affects the variety of the items that can be exported. Here’s a table to help you choose from these formats.
 
 | File Format | Extension | Category | Supported Feature Types | Description | Good for displaying |
 | ----------- | --------- | ---------| ----------------------- | ------------| ---|
@@ -84,11 +86,9 @@ In addition to the Version and the User Manual (the article you are reading now)
 
 ## Custom Export Tab
 
-![Default Interface of the Custom Export Tab](src/Carto-Custom-Export-Tab-Default.png)
-
-*The default interface of the Custom Export Tab*
-
 The second tab is the Custom Export Tab, where you can customize the contents and the items you want to export. Normally the options in this tab can’t be changed at once, because the options not applicable to the current selected file format will be disabled. Here’s a table of available features provided by Carto:
+
+![Default Interface of the Custom Export Tab](src/Carto-Custom-Export-Tab-Default.png)
 
 | Feature Name | Category | Contents | Image |
 | ------------ | -------- | -------- |:-----:|
@@ -102,21 +102,18 @@ The second tab is the Custom Export Tab, where you can customize the contents an
 
 Users only need to switch between the six options in the table above under general circumstances. For the users who want to have all controls over the exported fields, Carto also provides them the **Advanced Mode** to play with. To enable the advanced mode, users just need to click on the “Show Advanced” button. New options, including a dropdown selector and several checkboxes, will appear at the bottom of the “Zoning” option. You can configure each feature type’s fields, by selecting the feature type in the “Select Feature” dropdown first, then manually toggling the fields you want to change.
 
-> *Due to a known issue, users are advised to double-click the “Show Advanced” button after switching options in the “Select Feature” dropdown to force the game to reload the user interface.*
+> [!NOTE]
+> Due to a known issue, double-click **Show Advanced** button after switching options in the **Select Feature** drop-down to force the game to reload the interface.
 
 ![Advanced Mode](src/Carto-Custom-Export-Tab-Advanced.png)
 
-*Default interface of the advanced view in the Custom Export Tab*
-
-Carto provides two types of fields, namely “spatial” and “non-spatial.” The former stores the spatial data of the currently selected features, that is, **their shapes**; the latter stores the attribute data of the currently selected features, in other words, **their statistical data**. Currently, Carto requires users to select at least one spatial field for each feature, while there are no restrictions on non-spatial fields (because Carto always outputs the Name field of the object). Followings are all fields supported by Carto:
+Carto provides two types of fields: *spatial* and *non-spatial*. The former stores the spatial data of the currently selected features, that is, **their shapes**; the latter stores the attribute data of the currently selected features, in other words, **their statistical data**. Currently, Carto requires users to select at least one spatial field for each feature, while there are no restrictions on non-spatial fields (because Carto always outputs the Name field of the object). Followings are all fields supported by Carto:
 
 ![Illustration of the relationship between spatial and non-spatial fields](src/Carto-Field-Type.png)
 
-*Illustration of the relationship between spatial and non-spatial fields*
-
 ### Spatial Fields
 
-Carto currently supports 7 spatial fields.
+Carto currently supports these spatial fields.
 
 #### Centerline
 
@@ -458,7 +455,7 @@ If you want to develop a program that works with the data, you might consider so
 
 You can find more information on this topic at [Awesome GIS](https://github.com/sshuair/awesome-gis).
 
-### Show Me Some Examples!
+### Show Me Some Examples
 
 Sure, here are some of the examples you can made with Carto:
 
