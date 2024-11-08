@@ -41,7 +41,7 @@ To open the Carto UI, Select **Options** (⚙️) &rarr; **Carto**. You can also
 
 The first interface that comes into your view is the General Tab. Here you can select the exported files’ format, naming conventions, the coordinates of the map center, etc.
 
->[!IMPORTANT] The file format you select affects the variety of the items that can be exported. Here’s a table to help you choose from these formats.
+> **IMPORTANT**: The file format you select affects the variety of the items that can be exported. Here’s a table to help you choose from these formats.
 
 | File Format | Extension | Category | Supported Feature Types | Description | Good for displaying |
 | ----------- | --------- | ---------| ----------------------- | ------------| ---|
@@ -53,7 +53,7 @@ The first interface that comes into your view is the General Tab. Here you can s
 
 The default option is the “Feature Type.” Other options include “City Name + Feature Type,” “Map Name + Feature Type,” and “Custom.” The first two add the map name and the city name in the current save respectively, such as `My City_Area.shp` or `My Map_Building.json`. The last one allows you to customize the file name, but you should be aware that only one file remains when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later.)
 
-> *Due to a known issue, the “Custom Name” input text box doesn’t appear when the option “Custom Name” is selected in the dropdown. Please double-click the “Show Advanced” button in the upper middle of the screen, so as to force the game to reload the user interface.*
+> Due to a known issue, the “Custom Name” input text box doesn’t appear when the option “Custom Name” is selected in the dropdown. Please double-click the “Show Advanced” button in the upper middle of the screen, so as to force the game to reload the user interface.
 
 ![Custom file name format input box](src/Carto-General-Custom-Format.png)
 
@@ -67,7 +67,7 @@ You can use *tokens* in the **Custom Name** field to display several save parame
 | `{Date}`    | The in-game date that follows [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. | `2027-04` |
 | `{Time}`    | The in-game time using `HHmm` format. | `1200` |
 
->[!IMPORTANT] Tokens are case-sensitive
+> **IMPORTANT**: Tokens are case-sensitive.
 
 The **latitude** and the **longitude** options are the highlight: Carto can project your city to most places on Earth as long as you provide a valid coordinate. You can use online map services like Google Maps to retrieve the coordinates of your target location, as shown in the image below. Of course, if there are no places you particularly want to project to, you can set both of them to zero.
 
