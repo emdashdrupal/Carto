@@ -1,16 +1,18 @@
-This is the homepage of Carto’s user manual; Please refer to each chapters to obtain more information. **The current manual version is compatible with version 0.3**.
+# Carto user manual homepage
+
+See each [chapter](#chapters) for more information. **This manual is compatible with version 0.3**.
 
 這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.3**。
 
-### Tutorial
+## Tutorial
 
 Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit the tutorial here|Tutorial]].
 
-### Installation
+## Installation
 
-You can add the mod on [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the only official distribution channel. Once you launch the game, the mod should be loaded to your device.
+Add the mod on [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the only official distribution channel. When you launch the game, the mod should automatically load.
 
-### Chapters
+## Chapters
 
 1. [General Tab](#general-tab)
 2. [Custom Export Tab](#custom-export-tab)
@@ -18,40 +20,44 @@ You can add the mod on [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/W
 4. [Post-export: What’s Next?](#post-export-whats-next)
 5. [Changelog](#changelog)
 
-### Feedback and Contacts
+## Feedback and Contacts
 
-You can reach me at the PDX forum’s comment section, Cities: Skylines Modding Discord server, or Cities: Skylines Taiwan Assets Discord server. If you need to start a more in-depth discussion or report complicated bugs, I’d suggest using GitHub’s issues or discussions, as it isn’t easy to track them between threads.
+You can reach me at:
 
 * 🌐 [Paradox Forum](https://forum.paradoxplaza.com/forum/threads/carto.1699089/)
 * 🛜 [Cities: Skylines Modding](https://discord.gg/HTav7ARPs2) - *English ONLY*
 * 🛜 [Cities: Skylines Taiwan Assets](https://discord.gg/Gz4K66jT64) - *Chinese preferred*
 * 📧 [4alpelna4lve@gmail.com](mailto:4alpelna4lve@gmail.com)
 
+ If you need to start a more in-depth discussion or report complicated bugs, use GitHub’s issues or discussions, as it isn’t easy to track them between threads.
+
 ## General Tab
 
-By clicking the button with the gear icon (⚙️) in the main menu or during the game, you can find Carto’s user interface in **Options**. Please search for “Carto” in the navigation bar on the left, then click on the text to access the settings of Carto.
+To open the Carto UI, Select **Options** (⚙️) &rarr; **Carto**. You can also search for “Carto” in the navigation bar on the left, then click the text to access settings.
 
 ![Default Interface of General Tab](src/Carto-General-Tab-Default.png)
 
-*The default interface of the General Tab*
+### General Tab interface
 
-The first interface that comes into your view is the General Tab. Here you can select the exported files’ format, naming conventions, the coordinates of the map center, etc. **It is important to understand which file format you should use** since this will affect the variety of the items that can be exported. Currently, Carto supports GeoJSON and Shapefile in the vector format, and GeoTIFF in the raster format. Here’s a table to help you choose from these formats:
+The first interface that comes into your view is the General Tab. Here you can select the exported files’ format, naming conventions, the coordinates of the map center, etc.
 
-| File Format | Extension | Category | Supported Feature Types | Description |
-| ----------- | --------- | ---------| ----------------------- | ------------|
-| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI & Zoning | The format is simple and lightweight and can be edited using a general text editor. It is suitable for the storage and the exchange of small amounts of data, but lacking indexing on each feature results in low search and rendering efficiency. |
-| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI & Zoning | The format is not easy to edit as it is encoded in binary format, and reading such format requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed. |
-| GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This is the image format that stores sequential data into pixels. You can open the file with major media viewers (such as Microsoft Photos). |
+>[!IMPORTANT] The file format you select affects the variety of the items that can be exported. Here’s a table to help you choose from these formats.
 
-Simply put, if you want to export buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells, you should choose GeoJSON or Shapefile. Otherwise, if you want to export water bodies or terrain heights, GeoTIFF will be your only choice.
+| File Format | Extension | Category | Supported Feature Types | Description | Good for displaying |
+| ----------- | --------- | ---------| ----------------------- | ------------| ---|
+| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI & Zoning | The format is simple and lightweight and can be edited using a general text editor. It is suitable for the storage and the exchange of small amounts of data, but lacking indexing on each feature results in low search and rendering efficiency. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
+| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI & Zoning | The format is not easy to edit as it is encoded in binary format, and reading such format requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
+| GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This is the image format that stores sequential data into pixels. You can open the file with major media viewers (such as Microsoft Photos). | Water bodies or terrain heights|
 
-The next option is the **naming format** of the file, and the default option is the “Feature Type.” Other options include “City Name + Feature Type,” “Map Name + Feature Type,” and “Custom.” The first two add the map name and the city name in the current save respectively, such as `My City_Area.shp` or `My Map_Building.json`. The last one allows you to customize the file name, but you should be aware that only one file remains when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later.)
+#### Naming format
+
+The default option is the “Feature Type.” Other options include “City Name + Feature Type,” “Map Name + Feature Type,” and “Custom.” The first two add the map name and the city name in the current save respectively, such as `My City_Area.shp` or `My Map_Building.json`. The last one allows you to customize the file name, but you should be aware that only one file remains when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later.)
 
 > *Due to a known issue, the “Custom Name” input text box doesn’t appear when the option “Custom Name” is selected in the dropdown. Please double-click the “Show Advanced” button in the upper middle of the screen, so as to force the game to reload the user interface.*
 
 ![Custom file name format input box](src/Carto-General-Custom-Format.png)
 
-You can use **tokens** in the “Custom Name” input box to display several save parameters. Here is the list of available tokens:
+You can use *tokens* in the **Custom Name** field to display several save parameters:
 
 | Token | Description | Example |
 | ----- | ----------- | ------- |
@@ -60,6 +66,8 @@ You can use **tokens** in the “Custom Name” input box to display several sav
 | `{Map}`     | The name of the map. | `My Map` |
 | `{Date}`    | The in-game date that follows [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. | `2027-04` |
 | `{Time}`    | The in-game time using `HHmm` format. | `1200` |
+
+>{!IMPORTANT} Tokens are case-sensitive
 
 The **latitude** and the **longitude** options are the highlight: Carto can project your city to most places on Earth as long as you provide a valid coordinate. You can use online map services like Google Maps to retrieve the coordinates of your target location, as shown in the image below. Of course, if there are no places you particularly want to project to, you can set both of them to zero.
 
@@ -165,7 +173,7 @@ Carto currently supports 7 spatial fields.
 
 ### Non-Spatial Fields
 
-Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have non-spatial fields. 
+Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have non-spatial fields.
 
 #### Address
 
