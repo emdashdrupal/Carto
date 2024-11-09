@@ -69,7 +69,7 @@ You can launch your QGIS after the installation; the executable is located in `C
 > ![Adding vector layers (2/2)](src/Tutorial-QGISAddVectorB.png)
 
 > **Figure 11** <br />
-> *The workspace after adding vector layers. It is normal that your colors are different from mine.*<a id="Figure11"></a>
+> *The workspace after adding vector layers. It is normal that your colors are different.*<a id="Figure11"></a>
 > ![The workspace after adding vector layers](src/Tutorial-QGISAddVectorFinish.png)
 
 Now we want to add raster layers. Navigate to and click on the “Layer” button in the top most menu, and then select “Add Layer” and “Add Raster Layer...” options. Again, the Data Source Manager window will pop up and ask for the link to the dataset, and please select all files with the extension `.tif` in the GeoTIFF folder (`Terrain.tif` & `Water.tif`) this time. There are eight layers in the workspace in total after you added the files; remember to save the project by navigating to the “Project” > “Save” option or clicking on the floppy disk / save icon (💾).

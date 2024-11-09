@@ -1,4 +1,4 @@
-# Carto user manual homepage
+# Carto wiki homepage
 
 Use Carto to export your city data and visualize it in layers in Geographical Information Systems (GIS) software or online viewers. This can help you analyze your city and plan ahead.
 
@@ -9,13 +9,17 @@ Use Carto to export your city data and visualize it in layers in Geographical In
 
 On this page:
 
-- [Installation](#installation)
+- [Install Carto](#install-carto)
 - [General tab](#general-tab)
 - [Custom Export tab](#custom-export-tab)
 - [Miscellaneous tab](#miscellaneous-tab)
-- [Post-export: What’s Next?](#post-export-whats-next)
+- [Export files](#export-files)
+- [Post-export: Now what?](#post-export-now-what)
+- [Feedback](#feedback)
+- [More info](#more-info)
 
-## Installation
+
+## Install Carto
 
 Add the mod to Cities:Skylines 2 from [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the only official distribution channel. When you launch the game, the mod should automatically load.
 
@@ -180,7 +184,7 @@ The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color 
 
 ![Use Zone Color Changer’s Color option](src/Carto-Misc-ZCC.png)
 
-## Exporting files
+## Export files
 
 Click **Export Files**  on the **General** tab to export in-game objects and data. Once the export finishes, click **Open Export Directory** to access the output folder (`C:\Users\<UserName>\AppData\LocalLow\Colossal Order\Cities Skylines II\ModsData\Carto`). Since Carto can only collect the relevant data after a save is loaded or an editor is launched, **Export Files** remains disabled until the condition is met.
 
@@ -190,14 +194,14 @@ You can reset all settings by clicking **Reset Mod Settings**. To prevent accide
 
 After you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations.
 
-### Using GIS software
+### Use Carto data with GIS software
 
 We recommend GIS software because it provides not only a powerful platform to view and edit the data, but also a set of tools to perform in-depth geographical analysis:
 
 - [QGIS](https://www.qgis.org/) is free, open-source software with numerous plug-ins developed and maintained by volunteers, which is why it's recommended. Here's a [step-by-step tutorial](Tutorial.md) to export maps with Carto and QGIS.
 - [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from (recommended if you have a license).
 
-### Using online viewers
+### Use Carto data with online viewers
 
 If you want to visualize the exported files but don’t have access to GIS software, you can use these sites to upload and view your geospatial data:
 
@@ -206,7 +210,7 @@ If you want to visualize the exported files but don’t have access to GIS softw
 - [Survey Transfer](https://app.surveytransfer.net/) supports GeoJSON, Shapefile, and GeoTIFF. The website requires you to register your account only with a 14-day free trial. (Not recommended)
 - [ArcGIS Online](https://maps.arcgis.com/apps/mapviewer/index.html) supports GeoJSON, Shapefile, and GeoTIFF. However, you have to purchase the license to access the features. (Not recommended if you don’t have a license.)
 
-### Using geospatial libraries
+### Use Carto data with geospatial libraries
 
 If you want to develop a program that works with the data, consider these libraries:
 
