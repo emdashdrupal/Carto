@@ -73,17 +73,13 @@ To find coordinates, right-click any location on Google Maps, then copy the coor
 
 The Projected Coordinate System (PCS) Carto uses is the [Universal Transverse Mercator](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system) (UTM), and the datum is [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System#WGS_84). UTM projection is applicable to any place on Earth as long as they are between 84°N and 80°S. Carto always exports files into UTM / WGS84 zone XXY (EPSG: 326XX / 327XX) projections except for GeoJSONs, since the OGC specification asks the software to treat the value in the spatial fields of GeoJSONs as EPSG: 4326 coordinates.
 
-## Exporting files
-
-Click **Export Files** to export in-game objects. Once the export finishes, click **Open Export Directory** to access the output folder (`C:\Users\<UserName>\AppData\LocalLow\Colossal Order\Cities Skylines II\ModsData\Carto`). Since Carto can only collect the relevant data after a save is loaded or an editor is launched, **Export Files** remains disabled until the condition is met.
-
-You can reset all settings by clicking **Reset Mod Settings**. To prevent accidental clicks, a confirmation dialog displays.
-
 ## Custom Export tab
 
-The second tab is the Custom Export tab, where you can customize the contents and the items you want to export. Normally the options in this tab can’t be changed at once, because the options aren't applicable to the current selected file format will be disabled. Here’s a table of available features provided by Carto:
+The second tab is the Custom Export tab, where you can customize what you export. Normally the options in this tab can’t be changed at once, because the options aren't applicable to the current selected file format will be disabled.
 
 ![Default Interface of the Custom Export tab](src/Carto-Custom-Export-tab-Default.png)
+
+Here’s a table of available features provided by Carto:
 
 | Feature Name | Category | Contents | Image |
 | ------------ | -------- | -------- |:-----:|
@@ -95,14 +91,14 @@ The second tab is the Custom Export tab, where you can customize the contents an
 | Water Bodies | Raster   | The water depths | ![Water Bodies](src/Carto-Water.png) |
 | Zoning       | Vector   | The zoning cells (small blocks) | ![Zonings](src/Carto-Zoning.png) |
 
-Users only need to switch between the six options in the table above under general circumstances. For the users who want to have all controls over the exported fields, Carto also provides them the **Advanced Mode** to play with. To enable the advanced mode, users just need to click on the “Show Advanced” button. New options, including a dropdown selector and several checkboxes, will appear at the bottom of the “Zoning” option. You can configure each feature type’s fields, by selecting the feature type in the “Select Feature” dropdown first, then manually toggling the fields you want to change.
+Users only need to switch between the six options in the table above under general circumstances. For the users who want to have all controls over the exported fields, Carto also provides them the **Advanced Mode** to play with. To enable the advanced mode, users just need to click on the **Show Advanced** button. New options, including a drop-down selector and several checkboxes, will appear at the bottom of the **Zoning** option. You can configure each feature type’s fields, by selecting the feature type in the **Select Feature** drop-down first, then manually toggling the fields you want to change.
 
 > [!NOTE]
 > Due to a known issue, double-click **Show Advanced** button after switching options in the **Select Feature** drop-down to force the game to reload the interface.
 
 ![Advanced Mode](src/Carto-Custom-Export-tab-Advanced.png)
 
-Carto provides two types of fields: *spatial* and *non-spatial*. The former stores the spatial data of the currently selected features, that is, **their shapes**; the latter stores the attribute data of the currently selected features, in other words, **their statistical data**. Currently, Carto requires users to select at least one spatial field for each feature, while there are no restrictions on non-spatial fields (because Carto always outputs the Name field of the object). Followings are all fields supported by Carto:
+Carto provides two types of fields: *spatial* and *non-spatial*. The former stores the spatial data of the currently selected features, that is, their *shapes*; the latter stores the attribute data of the currently selected features, in other words, their *statistical data*. Currently, Carto requires users to select at least one spatial field for each feature, while there are no restrictions on non-spatial fields (because Carto always outputs the Name field of the object). The next sections describe the fields supported by Carto:
 
 ![Illustration of the relationship between spatial and non-spatial fields](src/Carto-Field-Type.png)
 
@@ -113,8 +109,8 @@ Carto supports these spatial fields.
 | Fieldname | Version | Feature | Geometry | Description |
 |-|-|-|-|-|
 | Centerline| 0.1+ | `Network` | Vector (lines) | The centerline of the network is widely used in network analysis.|
-| Centerline |  0.1+ |   `Network` |  Vector (Lines) |  The centerline of the network is widely used in network analysis.
-|  Depth |  0.1+ |   `Water Bodies` |  Raster (7m × 7m) |  The depth of the water bodies. Depending on the [GeoTIFF Format](#geotiff-format) you choose, the land part (depth = 0) will be replaced by different nodata values.
+| Centerline |  0.1+ |   `Network` |  Vector (Lines) |  The centerline of the network is widely used in network analysis|
+|  Depth |  0.1+ |   `Water Bodies` |  Raster (7m × 7m) |  The depth of the water bodies. Depending on the [GeoTIFF Format](#geotiff-format) you choose, the land part (depth = 0) will be replaced by different nodata values.|
 |  Edge |  0.1+ |   `Area`, `Building`, `Network`, `Zoning` |  Vector (Polygons) |  The outline of the features.<ul><li>For `Building` features, this represents *the collision area of the building*.</li> <li>For `Network` features, this represents *the surface area of the networks*.</li></ul> <br>**Caution**: The exported network edges might have invalid geometries; you can use the fix geometry function in GIS software to handle the data at the moment.|
 |  Elevation |  0.1+ |   `Terrain` |  Raster (3.5m × 3.5m) |  The elevation of the terrain. Note that this is *not* the distance between terrain and the sea level, but the distance between that and the in-game origin.|
 |  Location |  0.3+ |   `POI` |  Vector (Points) |  The position of the feature.|
@@ -127,11 +123,11 @@ Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fiel
 
 | Fieldname | Version | Feature |Data type | Description |
 |-|-|-|-|-|
-| Address | 0.2+ | `Building`, `POI`| Composite (String, Integer)| The in-game building identifier.This field is a composite field. Three fields will be exported:    <ul><li>GeoJSON: `Address_District`, `Address_Street`, `Address_Number`.<li> Shapefile: `Addr_dist`, `Addr_strt`, `Addr_nmbr`.</li>    <li>Before 0.2.5 update, these fields had different names: `Address.District`, `Address.Street`, `Address.Number`, `Addr.dist`, `Addr.strt`, `Addr.nmbr`.<ul><li> The buildings will be classified as “(Unincorporated Area)” if they don't belong to any districts. The buildings without a house number will receive the default of 0.</li></li></ul>|
+| Address | 0.2+ | `Building`, `POI`| Composite (String, Integer)| The in-game building identifier.This field is a composite field. Three fields will be exported:    <ul><li>GeoJSON: `Address_District`, `Address_Street`, `Address_Number`.<li> Shapefile: `Addr_dist`, `Addr_strt`, `Addr_nmbr`.</li>    <li>Before 0.2.5 update, these fields had different names: `Address.District`, `Address.Street`, `Address.Number`, `Addr.dist`, `Addr.strt`, `Addr.nmbr`.<ul><li> The buildings will be classified as **(Unincorporated Area)** if they don't belong to any districts. The buildings without a house number will receive the default of 0.</li></li></ul>|
 | Area| 0.1+| `Area`| Float| The extent of the object in **square meters** (m<sup>2</sup>).|
 | Asset| 0.1+| `Building`, `Network`| String| The title of the asset.|
 | Brand| 0.2+| `Building`| String| The name of the enterprise that rents the property.|
-| Category| 0.1+| `Building`, `Network`, `POI`| String| The sub-division of the in-game objects.<ul><li> See the [category list](#category) for a detailed list of all possible values.</li><li>A feature can have multiple categories. For example, Incineration Plant has the category of `Public, Power, Waste`, and the Medium road with tram tracks has the category of `Medium, Tram`.|
+| Category| 0.1+| `Building`, `Network`, `POI`| String| The sub-division of the in-game objects.<ul><li> See the [category list](Category.md) for a detailed list of all possible values.</li><li>A feature can have multiple categories. For example, Incineration Plant has the category of `Public, Power, Waste`, and the Medium road with tram tracks has the category of `Medium, Tram`.|
 | Center| 0.1+| `Area`| Composite (Float)| The center coordinate of the area.<ul><li> This field is a **composite field**. Three fields will be exported:</li>  <li>GeoJSON, Shapefile: `Center_x`, `Center_y`, `Center_z`.<li> Before 0.2.5 update, these fields had different names: `Center.x`, `Center.y`, `Center.z`. <ul><li> The coordinate exported is the in-game coordinates, where the origin is the map center.</li></li></ul>|
 | Color| 0.1.1+| `Zoning`| String| The zoning color in the game. <ul><li> When the [Use Zone Color Changer’s Color](#UseZoneColorChangersColor) option is enabled, the value will be replaced by the Zone Color Changer mod’s current settings.|
 | Company| 0.2.2+| `Area`| Integer| Number of companies in the area.<ul><li> Carto regards a factory or a store as one company. Even if the stores are owned by the same brand, Carto still counts them individually.</li><li>Carto doesn’t export company count of each map tiles.|
@@ -180,11 +176,17 @@ The fourth option is the <a id="CountHomelessResidents"></a> **Count Homeless Re
 
 The fifth option is the <a id="ExportUnzoned"></a> **Export Unzoned Zoning Cells** option. When enabled, Carto will export every zoning cells, even if they are not zoned (empty). Disable this option to reduce the file size.
 
-The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color Changer’s Color** option. This option will only appear when Carto detects that [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) mod is loaded. When enabled, the [Color](#color) field will be replaced by Zone Color Changer’s current settings.
+The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color Changer’s Color** option. This option will only appear when Carto detects that [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) mod is loaded. When enabled, the Color field is replaced by Zone Color Changer’s current settings.
 
 ![Use Zone Color Changer’s Color option](src/Carto-Misc-ZCC.png)
 
-## Post-export: What’s next?
+## Exporting files
+
+Click **Export Files**  on the **General** tab to export in-game objects and data. Once the export finishes, click **Open Export Directory** to access the output folder (`C:\Users\<UserName>\AppData\LocalLow\Colossal Order\Cities Skylines II\ModsData\Carto`). Since Carto can only collect the relevant data after a save is loaded or an editor is launched, **Export Files** remains disabled until the condition is met.
+
+You can reset all settings by clicking **Reset Mod Settings**. To prevent accidental clicks, a confirmation dialog displays.
+
+## Post-export: Now what?
 
 After you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations.
 
@@ -192,8 +194,8 @@ After you export the files, how do you view and use the data? The following prov
 
 We recommend GIS software because it provides not only a powerful platform to view and edit the data, but also a set of tools to perform in-depth geographical analysis:
 
-- [QGIS](https://www.qgis.org/) is a free and open-source software, and there are numerous QGIS plug-ins developed and maintained by volunteers and is recommended. Here's a [step-by-step tutorial](Tutorial.md) to export maps with Carto and QGIS.
-- [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from. (Recommended if you have a license)
+- [QGIS](https://www.qgis.org/) is free, open-source software with numerous plug-ins developed and maintained by volunteers, which is why it's recommended. Here's a [step-by-step tutorial](Tutorial.md) to export maps with Carto and QGIS.
+- [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from (recommended if you have a license).
 
 ### Using online viewers
 
@@ -206,7 +208,7 @@ If you want to visualize the exported files but don’t have access to GIS softw
 
 ### Using geospatial libraries
 
-If you want to develop a program that works with the data, you might consider some of the following libraries:
+If you want to develop a program that works with the data, consider these libraries:
 
 - [GDAL](https://github.com/OSGeo/gdal) is a library that serves as a convertor between multiple geospatial data formats.
 - [GeoPandas](https://github.com/geopandas/geopandas) is a Python library where you can access data by the class `GeoDataFrame`.
@@ -216,19 +218,21 @@ You can find more information on this topic at [Awesome GIS](https://github.com/
 
 ### Examples
 
-Here are some examples you can make with Carto:
+Here are some examples you can make with Carto.
 
-![Classic Street Map](src/Carto-Example-1.png)
+- A classic street map using Area, Building, Network (Edge), POIs, Terrain, and Water Bodies features:
 
-*A classic street map using Area, Building, Network (Edge), POIs, Terrain, and Water Bodies features.*
+    ![Classic Street Map](src/Carto-Example-1.png)
 
-![Beverage Industry Map](src/Carto-Example-2.png)
+- A map showing the fierce competition of the beverage industry in the city, using Area, Building, and Water Bodies features:
 
-*A map showing the fierce competition of the beverage industry in the city, using Area, Building, and Water Bodies features.*
+    ![Beverage Industry Map](src/Carto-Example-2.png)
+
+
+
+This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process:
 
 ![Application In Georeferencing](src/Carto-Example-3.png)
-
-*This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process.*
 
 ## Feedback
 
