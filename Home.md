@@ -13,13 +13,12 @@ Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit 
 
 Add the mod on [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the only official distribution channel. When you launch the game, the mod should automatically load.
 
-## Chapters
+## On this page
 
 1. [General Tab](#general-tab)
 2. [Custom Export Tab](#custom-export-tab)
 3. [Miscellaneous Tab](#miscellaneous-tab)
 4. [Post-export: What’s Next?](#post-export-whats-next)
-5. [Changelog](#changelog)
 
 ## Feedback and Contacts
 
@@ -118,242 +117,48 @@ Carto supports these spatial fields.
 | Fieldname | Version | Feature | Geometry | Description |
 |-|-|-|-|-|
 | Centerline| 0.1+ | `Network` | Vector (lines) | The centerline of the network is widely used in network analysis.|
-| Centerline |  0.1 + |   `Network` |  Vector (Lines) |  The centerline of the network is widely used in network analysis.
-|  Depth |  0.1 + |   `Water Bodies` |  Raster (7m × 7m) |  The depth of the water bodies. Depending on the [GeoTIFF Format](#geotiff-format) you choose, the land part (depth = 0) will be replaced by different nodata values.
-|  Edge |  0.1 + |   `Area`, `Building`, `Network`, `Zoning` |  Vector (Polygons) |  The outline of the features.<ul><li>For `Building` features, this represents *the collision area of the building*.</li> <li>For `Network` features, this represents *the surface area of the networks*.</li></ul> <br>**Caution**: The exported network edges might have invalid geometries; you can use the fix geometry function in GIS software to handle the data at the moment.
-|  Elevation |  0.1 + |   `Terrain` |  Raster (3.5m × 3.5m) |  The elevation of the terrain. Note that this is *not* the distance between terrain and the sea level, but the distance between that and the in-game origin.
-|  Location |  0.3 + |   `POI` |  Vector (Points) |  The position of the feature.
-|  World Depth |  0.2.1 + |   `Water Bodies` |  Raster (14m × 14m) |  The depth of the water bodies with the region outside of the playable area (world) included.<br> Since the depth of the dummy water bodies outside of the playable area is obtained by the difference between the sea level and the terrain, you should only use the value outside of the playable area, in case you want to merge it with the [Depth](#depth) field.
-|  World Elevation |  0.2.1 + |   `Terrain` |  Raster (14m × 14m) |  The elevation of the terrain with the region outside of the playable area (world) included. Since the terrain data from the world heightmap will not be updated by the game, you should only use the value outside of the playable area, in case you want to merge it with the [Elevation](#elevation) field.
-
+| Centerline |  0.1+ |   `Network` |  Vector (Lines) |  The centerline of the network is widely used in network analysis.
+|  Depth |  0.1+ |   `Water Bodies` |  Raster (7m × 7m) |  The depth of the water bodies. Depending on the [GeoTIFF Format](#geotiff-format) you choose, the land part (depth = 0) will be replaced by different nodata values.
+|  Edge |  0.1+ |   `Area`, `Building`, `Network`, `Zoning` |  Vector (Polygons) |  The outline of the features.<ul><li>For `Building` features, this represents *the collision area of the building*.</li> <li>For `Network` features, this represents *the surface area of the networks*.</li></ul> <br>**Caution**: The exported network edges might have invalid geometries; you can use the fix geometry function in GIS software to handle the data at the moment.|
+|  Elevation |  0.1+ |   `Terrain` |  Raster (3.5m × 3.5m) |  The elevation of the terrain. Note that this is *not* the distance between terrain and the sea level, but the distance between that and the in-game origin.|
+|  Location |  0.3+ |   `POI` |  Vector (Points) |  The position of the feature.|
+|  World Depth |  0.2.1+ |   `Water Bodies` |  Raster (14m × 14m) |  The depth of the water bodies with the region outside of the playable area (world) included.<br> Since the depth of the dummy water bodies outside of the playable area is obtained by the difference between the sea level and the terrain, you should only use the value outside of the playable area, in case you want to merge it with the Depth field.|
+|  World Elevation |  0.2.1+ |   `Terrain` |  Raster (14m × 14m) |  The elevation of the terrain with the region outside of the playable area (world) included. Since the terrain data from the world heightmap will not be updated by the game, you should only use the value outside of the playable area, in case you want to merge it with the Elevation field.|
 
 ### Non-Spatial Fields
 
-Carto currently supports 23 + 1 non-spatial fields. GeoTIFF **DOESN’T** have non-spatial fields.
+Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fields.
 
-#### Address
-
-* Verison: 0.2 +
-* Feature: `Building` & `POI`
-* Data Type: Composite (String, Integer)
-* Description: The in-game building identifier.
-  * This field is a **composite field**. Three fields will be exported:
-    * GeoJSON: `Address_District`, `Address_Street` & `Address_Number`.
-    * Shapefile: `Addr_dist`, `Addr_strt` & `Addr_nmbr`.
-    * Before 0.2.5 update, these fields had different names: `Address.District`, `Address.Street`, `Address.Number`, `Addr.dist`, `Addr.strt` & `Addr.nmbr`.
-  * The buildings will be classified as “(Unincorporated Area)” if they do not belong to any districts. The buildings without a house number will receive the default number, 0.
-
-#### Area
-
-* Version: 0.1 +
-* Feature: `Area`
-* Data Type: Float
-* Description: The extent of the object in **square meters** (m<sup>2</sup>).
-
-#### Asset
-
-* Version: 0.1 +
-* Feature: `Building` & `Network`
-* Data Type: String
-* Description: The title of the asset.
-
-#### Brand
-
-* Version: 0.2 +
-* Feature: `Building`
-* Data Type: String
-* Description: The name of the enterprise that rents the property.
-
-#### Category
-
-* Version: 0.1 +
-* Feature: `Building`, `Network` & `POI`
-* Data Type: String
-* Description: The sub-division of the in-game objects.
-  * Please refer to the [[category list|Category]] for a detailed list of all possible values.
-  * A feature can have multiple categories. For example, Incineration Plant has the category of `Public, Power, Waste`, and the Medium road with tram tracks has the category of `Medium, Tram`.
-
-#### Center
-
-* Version: 0.1 +
-* Feature: `Area`
-* Data Type: Composite (Float)
-* Description: The center coordinate of the area.
-  * This field is a **composite field**. Three fields will be exported:
-    * GeoJSON & Shapefile: `Center_x`, `Center_y` & `Center_z`.
-    * Before 0.2.5 update, these fields had different names: `Center.x`, `Center.y` & `Center.z`.
-  * The coordinate exported is the in-game coordinates, where the origin is the map center.
-
-#### Color
-
-* Version: 0.1.1 +
-* Feature: `Zoning`
-* Data Type: String
-* Description: The zoning color in the game.
-  * When the [Use Zone Color Changer’s Color](#UseZoneColorChangersColor) option is enabled, the value will be replaced by the Zone Color Changer mod’s current settings.
-
-#### Company
-
-* Version: 0.2.2 +
-* Feature: `Area`
-* Data Type: Integer
-* Description: Number of companies in the area.
-  * Carto regards a factory or a store as one company. Even if the stores are owned by the same brand, Carto still counts them individually.
-  * Carto doesn’t export company count of each map tiles.
-
-#### Density
-
-* Version: 0.1.1 +
-* Feature: `Zoning`
-* Data Type: String
-* Description: The development intensity of the zoning type.
-  * The density of zonings:
-    * `Generic`
-    * `Low`
-    * `Medium`
-    * `High`
-
-#### Direction
-
-* Version: 0.1 +
-* Feature: `Network`
-* Data Type: String
-* Description: The direction that vehicles move along to.
-  * The direction of networks:
-    * `Both`
-    * `Forward`
-    * `Backward`
-
-#### Employee
-
-* Version: 0.2 +
-* Feature: `Area` & `Building`
-* Data Type: Integer
-* Description: The number of employees in the area.
-  * Carto doesn’t export employee count of each map tiles.
-
-#### Form
-
-* Version: 0.1 +
-* Feature: `Network`
-* Data Type: String
-* Description: The style of the network.
-  * The form of networks:
-    * `Normal`
-    * `Elevated`
-    * `Tunnel`
-
-#### Height
-
-* Version: 0.1 +
-* Feature: `Network`
-* Data Type: Float
-* Description: The average height of the network in **meters** (m).
-
-#### Household
-
-* Version: 0.2 +
-* Feature: `Area` & `Building`
-* Data Type: Integer
-* Description: The number of households in the area.
-  * When the [Count Homeless Residents](#CountHomelessResidents) option is enabled, the homeless living in the park will be counted.
-  * Carto doesn’t export household count of each map tiles.
-
-#### Length
-
-* Version: 0.1 +
-* Feature: `Network`
-* Data Type: Float
-* Description: The length of the network in **meters** (m).
-
-#### Level
-
-* Version: 0.2 +
-* Feature: `Building`
-* Data Type: Integer
-* Description: The upgrade progress of the building.
-
-#### Name
-
-* Version: 0.1 +
-* Feature: `Area`, `Building`, `Network`, `POI` & `Zoning`
-* Data Type: String
-* Description: The name of the object.
-  * This is a mandatory field, **you can’t export without this field**.
-
-#### Object
-
-* Version: 0.1 +
-* Feature: `Area`, `Building`, `Network`, `POI` & `Zoning`
-* Data Type: String
-* Description: Carto's classification of the in-game objects.
-  * All object types:
-    * `Building`
-    * `District`
-    * `Map Tile`
-    * `Pathway`
-    * `Road`
-    * `Track`
-    * `Zoning`
-
-#### Product
-
-* Version: 0.2 +
-* Feature: `Building`
-* Data Type: String
-* Description: The merchandise sold by stores or factories.
-
-#### Resident
-
-* Version: 0.2 +
-* Feature: `Area` & `Building`
-* Data Type: Integer
-* Description: The number of residents in the area.
-  * When the [Count Homeless Residents](#CountHomelessResidents) option is enabled, the homeless living in the park will be counted.
-  * Carto doesn’t export household count of each map tiles.
-
-#### Theme
-
-* Version: 0.1.1 +
-* Feature: `Building` & `Zoning`
-* Data Type: String
-* Description: The style of the assets.
-
-#### Unlocked
-
-* Version: 0.1 +
-* Feature: `Area`
-* Data Type: Boolean / Integer
-* Description: The purchase status of the map tiles.
-  * When exported into GeoJSON: boolean (true / false); when exported into Shapefile: integer (0 / 1).
-
-#### Width
-
-* Version: 0.1 +
-* Feature: `Network`
-* Data Type: Float
-* Description: The width of the network in **meters** (m).
-
-#### Zoning
-
-* Version: 0.2 +
-* Feature: `Building` & `Zoning`
-* Data Type: String
-* Description: The classification of designated development purposes.
-  * All zoning types:
-    * `None`
-    * `Residential`
-    * `Commercial`
-    * `Industrial`
-    * `Office`
-
-  * A feature can have multiple zonings. For example, EU Mixed Housing has the zoning of `Residential, Commercial`.
+| Fieldname | Version | Feature |Data type | Description |
+|-|-|-|-|-|
+| Address | 0.2+ | `Building` & `POI`| Composite (String, Integer)| The in-game building identifier.This field is a composite field. Three fields will be exported:    <ul><li>GeoJSON: `Address_District`, `Address_Street` & `Address_Number`.<li> Shapefile: `Addr_dist`, `Addr_strt` & `Addr_nmbr`.</li>    <li>Before 0.2.5 update, these fields had different names: `Address.District`, `Address.Street`, `Address.Number`, `Addr.dist`, `Addr.strt` & `Addr.nmbr`.<ul><li> The buildings will be classified as “(Unincorporated Area)” if they don't belong to any districts. The buildings without a house number will receive the default of 0.</li></li></ul>|
+| Area| 0.1+| `Area`| Float| The extent of the object in **square meters** (m<sup>2</sup>).|
+| Asset| 0.1+| `Building` & `Network`| String| The title of the asset.|
+| Brand| 0.2+| `Building`| String| The name of the enterprise that rents the property.|
+| Category| 0.1+| `Building`, `Network` & `POI`| String| The sub-division of the in-game objects.<ul><li> See the [category list](#category) for a detailed list of all possible values.</li><li>A feature can have multiple categories. For example, Incineration Plant has the category of `Public, Power, Waste`, and the Medium road with tram tracks has the category of `Medium, Tram`.|
+| Center| 0.1+| `Area`| Composite (Float)| The center coordinate of the area.<ul><li> This field is a **composite field**. Three fields will be exported:</li>  <li>GeoJSON & Shapefile: `Center_x`, `Center_y` & `Center_z`.<li> Before 0.2.5 update, these fields had different names: `Center.x`, `Center.y` & `Center.z`. <ul><li> The coordinate exported is the in-game coordinates, where the origin is the map center.</li></li></ul>|
+| Color| 0.1.1+| `Zoning`| String| The zoning color in the game. <ul><li> When the [Use Zone Color Changer’s Color](#UseZoneColorChangersColor) option is enabled, the value will be replaced by the Zone Color Changer mod’s current settings.|
+| Company| 0.2.2+| `Area`| Integer| Number of companies in the area.<ul><li> Carto regards a factory or a store as one company. Even if the stores are owned by the same brand, Carto still counts them individually.</li><li>Carto doesn’t export company count of each map tiles.|
+| Density| 0.1.1+| `Zoning`| String| The development intensity of the zoning type.<ul><li> The density of zonings:</li>  <li>`Generic`<li> `Low`</li>  <li>`Medium`<li> `High`</li></ul>|
+| Direction| 0.1+| `Network`| String| The direction that vehicles move along to.<ul><li> The direction of networks:</li>  <li>`Both`<li> `Forward`</li>  <li>`Backward`</li></ul>|
+| Employee| 0.2+| `Area` & `Building`| Integer| The number of employees in the area.<ul><li> Carto doesn’t export employee count of each map tiles.</li></ul>|
+| Form | 0.1+| `Network`| String| The style of the network. <ul><li> The form of networks:</li>  <li>`Normal`<li> `Elevated`</li>  <li>`Tunnel`|
+| Height | 0.1+| `Network`| Float| The average height of the network in **meters** (m).|
+| Household | 0.2+| `Area` & `Building`| Integer| The number of households in the area. <ul><li> When the [Count Homeless Residents](#CountHomelessResidents) option is enabled, the homeless living in the park will be counted.</li><li>Carto doesn’t export household count of each map tiles.</li></ul>|
+| Length| 0.1+| `Network`| Float| The length of the network in **meters** (m).|
+| Level| 0.2+| `Building`| Integer| The upgrade progress of the building.|
+| Name| 0.1+| `Area`, `Building`, `Network`, `POI` & `Zoning`| String| The name of the object.<ul><li> This is a mandatory field, **you can’t export without this field**.</li></ul>|
+| Object| 0.1+| `Area`, `Building`, `Network`, `POI` & `Zoning`| String| Carto's classification of the in-game objects.<ul><li> All object types:</li>  <li>`Building`<li> `District`</li>  <li>`Map Tile`<li> `Pathway`</li>  <li>`Road`<li> `Track`</li>  <li>`Zoning`|
+| Product| 0.2+| `Building`| String| The merchandise sold by stores or factories.|
+| Resident| 0.2+| `Area` & `Building`| Integer| The number of residents in the area. <ul><li> When the [Count Homeless Residents](#CountHomelessResidents) option is enabled, the homeless living in the park will be counted.</li><li>Carto doesn’t export household count of each map tiles.|
+| Theme| 0.1.1+| `Building` & `Zoning`| String| The style of the assets.|
+| Unlocked | 0.1+| `Area`| Boolean / Integer| The purchase status of the map tiles. <ul><li> When exported into GeoJSON: boolean (true / false); when exported into Shapefile: integer (0 / 1).</li></ul>|
+| Width | 0.1+| `Network`| Float| The width of the network in **meters** (m).|
+| Zoning | 0.2+| `Building` & `Zoning`| String| The classification of designated development purposes.A feature can have multiple zonings. For example, EU Mixed Housing has the zoning of `Residential, Commercial`. All zoning types:<ul><li>`None`<li> `Residential`</li>  <li>`Commercial`<li> `Industrial`</li>  <li>`Office`</li></ul> |
 
 ## Miscellaneous Tab
 
 ![Default Interface of Miscellaneous Tab](src/Carto-Misc-Tab-Default.png)
-
-*The default interface of the Miscellaneous Tab*
 
 The last interface is the Miscellaneous Tab. The first option is the <a id="geotiff-format"></a>**GeoTIFF Format**, and you can choose from the following three formats: Int16, Norm16, and Float32.
 
@@ -374,7 +179,8 @@ The fourth option is the <a id="CountHomelessResidents"></a> **Count Homeless Re
 | Household / Resident | ✅              | ⚠️Only those live in the park | ❌                                              |The homeless without any temporary shelters can be regarded as foreigners. |
 | Employee             | ✅              | ✅                            | ✅                                              |The homeless and migrant workers are valid workers. |
 
-*Assumes the Count Homeless Residents option is enabled*
+> {!NOTE}
+> Assumes the Count Homeless Residents option is enabled.
 
 The fifth option is the <a id="ExportUnzoned"></a> **Export Unzoned Zoning Cells** option. When enabled, Carto will export every zoning cells, even if they are not zoned (empty). Disable this option to reduce the file size.
 
@@ -384,11 +190,11 @@ The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color 
 
 ## Post-export: What’s Next?
 
-So after you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations:
+So after you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations.
 
 ### Using GIS Software
 
-Carto recommends users use GIS software because it provides them with not only a powerful platform to view and edit the data but also a set of tools to perform in-depth geographical analysis. Here are some of the GIS software you can use:
+We recommend GIS software because it provides not only a powerful platform to view and edit the data, but also a set of tools to perform in-depth geographical analysis:
 
 * [QGIS](https://www.qgis.org/) is a free and open-source software, and there are numerous QGIS plug-ins developed and maintained by volunteers. (Recommended)<br />
   * Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit the tutorial here|Tutorial]].
@@ -396,7 +202,7 @@ Carto recommends users use GIS software because it provides them with not only a
 
 ### Using Online Viewers
 
-For the users who want to visualize the exported files but don’t have access to GIS software, this will be their primary method to view the geospatial data. Here are some of the websites where you can view the data:
+If you want to visualize the exported files but don’t have access to GIS software, you can use these sites to upload and view your geospatial data:
 
 * [mapshaper](https://mapshaper.org/) supports GeoJSON and Shapefile. You can import multiple layers and the file-loading process is efficient. (Recommended)
 * [geojson.io](https://geojson.io/) supports GeoJSON. You can edit the shape and change the color at the same time. (Recommended)
@@ -429,87 +235,6 @@ Sure, here are some of the examples you can made with Carto:
 
 *This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process.*
 
-## Changelog
+## More info
 
-### 0.3
-
-* Now Carto can export points of interest (POIs).
-  * The POI feature has the following spatial field: <u>Location</u>.
-  * The POI feature has the following non-spatial fields: Address and Category.
-* Added POI Category Format option (Miscellaneous Tab > POI Category Format). Users can select from two options: All and Single. The former exports all applicable categories of the POI, and the latter only exports the most applicable one; default to be All.
-* Added Export Sub-Building Upgrades’ POIs option (Miscellaneous Tab > Export Sub-Building Upgrades’ POIs). Users can decide whether to export sub-building upgrades as individual POIs or not; default to be false.
-* Added three ready-to-use QGIS style presets (Plan, Street & Topo); they can be accessed in the directory `ModsData\Carto\Styles`.
-
-Note: <u>Underlined</u> fields are newly added.
-
-### 0.2.5
-
-* Fixed the issue where ArcGIS Pro could not read files containing periods (.) in the field titles. The separators for these fields are now replaced with underscores (_). [Reported by [load-ing](https://forum.paradoxplaza.com/forum/members/load-ing.1818892/)]
-* Added two new tokens to use in the Custom Name field: {Date} & {Time}. The former represents the in-game date, and the latter represents the in-game time.
-
-### 0.2.4
-
-* Fixed the issue where the Edge field of the Network feature could not be read by software such as ArcGIS. [Reported by [Cities: Skylines LightLight](https://www.youtube.com/@CS_LightLight)]
-* Fixed the jagged edges of some pathways connecting to the normal roads.
-* Tried to fix the problem of the exported Edge field of the Network feature containing invalid polygons. Some micro (< 1m) self-intersections may still appear when the roads are connected at a very sharp angle.
-
-### 0.2.3
-
-* Fixed the bug where the export process stopped when at least one chosen feature doen’t have matching entities. These features are now ignored and the user will be notified at the end of the export. [Reported by [@Allegretic](https://mods.paradoxplaza.com/authors/Allegretic)]
-
-### 0.2.2
-
-* Added four nonspatial fields to the Area features, including <u>Company</u>, Employee, Household, and Resident.
-* Added one nonspatial field to Building features: Theme.
-* Added User Manual button (General Tab > User Manual), which allows users to access the manual directly.
-* Added Count Homeless Residents option (Miscellaneous Tab > Count Homeless Residents). Users can decide to neglect the homeless when calculating the number of households and residents; default to be true.
-* Fix the bug that the mod can not export Shapefiles when the directory `ModsData\Carto\Shapefile` doesn’t exist.
-* Remove UTF-8 BOM at the beginning of `.prj` files, so ArcGIS Pro can correctly identify the CRS of the Shapefiles.
-* Added the export success dialog.
-* Added support for the networks made by Road Builder mod.
-
-Note: <u>Underlined</u> fields are newly added.
-
-### 0.2.1
-
-* Now Carto can export the world heightmap, which covers the area beyond the playable ones.
-  * Added a new spatial field for Terrain: World Elevation.
-  * Added a new spatial field for Water Bodies: World Depth.
-* Added GeoTIFF Format option (Miscellaneous Tab > GeoTIFF Format). Users can choose from three options, they are Int16 (16-bit Integer), Norm16 (16-bit Normalized Number), and Float32 (32-bit Float Number); default to be Int16.
-* Rewrite the method to export Shapefiles. Now the string field in the dBASE file is not fixed to 254 bytes but dynamically calculated, which can reduce the file size by 80% on average.
-* Reorganize the options. Version is now added to the General Tab, and the Enable All Fields button is migrated to the Miscellaneous Tab.
-* Added the export warning dialog, which is aimed at helping users avoid predictable errors.
-* Added Simplified Chinese (zh-HANS) and Traditional Chinese (zh-HANT) translations.
-
-### 0.2
-
-* Now Carto can export buildings, users can configure them in the Custom Export Tab.
-  * The Building feature has the following spatial field: Edge.
-  * The Building feature has the following nonspatial fields: <u>Address</u>, Assets, <u>Brand</u>, <u>Employee</u>, <u>Household</u>, <u>Level</u>, Object, <u>Product</u>, <u>Resident</u>, and <u>Zoning</u>.
-* The Category field of the zoning is now renamed as the Zoning field.
-* Several generic classes migrated to Carto.Domain and Carto.Utils.ExportUtils namespaces.
-
-Note: <u>Underlined</u> fields are newly added.
-
-### 0.1.2
-
-* Now Carto can export the spatial field of zonings (Edge).
-  * Carto.Systems.ZoningSystem.GetZoningProperties() is now integrated into Carto.Utils.ExportUtils.
-  * Remove the behavior of calling the method mentioned on the game loaded.
-* Fix the bug that vanilla zone colors can not be exported once the Zone Color Changer is enabled.
-* Added Miscellaneous Tab and two options：
-  * Added Export Unzoned Zoning Cells option. Users can decide not to export empty cells to reduce the file size; default to be false.
-  * Added Use Zone Color Changer’s Color option. Users can decide to export Zone Color Changer’s colors instead of vanilla’s; default to be true.
-
-### 0.1.1
-
-* Now Carto can export the nonspatial fields of zonings, including Category, <u>Color</u>, <u>Density</u>, Object, and <u>Theme</u>.
-  * Carto.Systems.ZoningSystem.GetZoningProperties() method will be called once the game is loaded, which leaves the information of each zoning type.
-  * Carto can not export zoning’s spatial field at the moment.
-* By using System.Reflection, Carto can integrate the zoning color information set in the Zone Color Changer mod.
-
-Note: <u>Underlined</u> fields are newly added.
-
-### 0.1
-
-* Carto’s first public repository version.
+[Changelog](carto-changelog.md)
