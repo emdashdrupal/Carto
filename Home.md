@@ -113,61 +113,19 @@ Carto provides two types of fields: *spatial* and *non-spatial*. The former stor
 
 ### Spatial Fields
 
-Carto currently supports these spatial fields.
+Carto supports these spatial fields.
 
-#### Centerline
+| Fieldname | Version | Feature | Geometry | Description |
+|-|-|-|-|-|
+| Centerline| 0.1+ | `Network` | Vector (lines) | The centerline of the network is widely used in network analysis.|
+| Centerline |  0.1 + |   `Network` |  Vector (Lines) |  The centerline of the network is widely used in network analysis.
+|  Depth |  0.1 + |   `Water Bodies` |  Raster (7m × 7m) |  The depth of the water bodies. Depending on the [GeoTIFF Format](#geotiff-format) you choose, the land part (depth = 0) will be replaced by different nodata values.
+|  Edge |  0.1 + |   `Area`, `Building`, `Network`, `Zoning` |  Vector (Polygons) |  The outline of the features.<ul><li>For `Building` features, this represents *the collision area of the building*.</li> <li>For `Network` features, this represents *the surface area of the networks*.</li></ul> <br>**Caution**: The exported network edges might have invalid geometries; you can use the fix geometry function in GIS software to handle the data at the moment.
+|  Elevation |  0.1 + |   `Terrain` |  Raster (3.5m × 3.5m) |  The elevation of the terrain. Note that this is *not* the distance between terrain and the sea level, but the distance between that and the in-game origin.
+|  Location |  0.3 + |   `POI` |  Vector (Points) |  The position of the feature.
+|  World Depth |  0.2.1 + |   `Water Bodies` |  Raster (14m × 14m) |  The depth of the water bodies with the region outside of the playable area (world) included.<br> Since the depth of the dummy water bodies outside of the playable area is obtained by the difference between the sea level and the terrain, you should only use the value outside of the playable area, in case you want to merge it with the [Depth](#depth) field.
+|  World Elevation |  0.2.1 + |   `Terrain` |  Raster (14m × 14m) |  The elevation of the terrain with the region outside of the playable area (world) included. Since the terrain data from the world heightmap will not be updated by the game, you should only use the value outside of the playable area, in case you want to merge it with the [Elevation](#elevation) field.
 
-* Version: 0.1 +
-* Feature: `Network`
-* Geometry: Vector (Lines)
-* Description: The centerline of the network is widely used in network analysis.
-
-#### Depth
-
-* Version: 0.1 +
-* Feature: `Water Bodies`
-* Geometry: Raster (7m × 7m)
-* Description: The depth of the water bodies. Depending on the [GeoTIFF Format](#geotiff-format) you choose, the land part (depth = 0) will be replaced by different nodata values.
-
-#### Edge
-
-* Version: 0.1 +
-* Feature: `Area`, `Building`, `Network` & `Zoning`
-* Geometry: Vector (Polygons)
-* Description: The outline of the features.
-  * For `Building` features, this represents **the collision area of the building**.
-  * For `Network` features, this represents **the surface area of the networks**. **Caution**: The exported network edges might have invalid geometries; you can use the fix geometry function in GIS software to handle the data at the moment.
-
-#### Elevation
-
-* Version: 0.1 +
-* Feature: `Terrain`
-* Geometry: Raster (3.5m × 3.5m)
-* Description: The elevation of the terrain.
-  * Note that this is **NOT** the distance between terrain and the sea level, but the distance between that and the in-game origin.
-
-#### Location
-
-* Version: 0.3 +
-* Feature: `POI`
-* Geometry: Vector (Points)
-* Description: The position of the feature.
-
-#### World Depth
-
-* Version: 0.2.1 +
-* Feature: `Water Bodies`
-* Geometry: Raster (14m × 14m)
-* Description: The depth of the water bodies with the region outside of the playable area (world) included.
-  * Since the depth of the dummy water bodies outside of the playable area is obtained by the difference between the sea level and the terrain, you should only use the value outside of the playable area, in case you want to merge it with the [Depth](#depth) field.
-
-#### World Elevation
-
-* Version: 0.2.1 +
-* Feature: `Terrain`
-* Geometry: Raster (14m × 14m)
-* Description: The elevation of the terrain with the region outside of the playable area (world) included.
-  * Since the terrain data from the world heightmap will not be updated by the game, you should only use the value outside of the playable area, in case you want to merge it with the [Elevation](#elevation) field.
 
 ### Non-Spatial Fields
 
