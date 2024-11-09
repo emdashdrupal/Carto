@@ -4,14 +4,12 @@ See each [chapter](#chapters) for more information. **This manual is compatible 
 
 這是 Carto 使用手冊的首頁，[[中文版說明|Home-zh]]請由此進；**目前手冊適用於版本 0.3**。
 
-<!-- ## Tutorial
-
-Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit the tutorial here|Tutorial]].
--->
 
 ## Installation
 
 Add the mod on [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the only official distribution channel. When you launch the game, the mod should automatically load.
+
+To open the Carto UI, Select **Options** (⚙️) &rarr; **Carto**. You can also search for Carto in the navigation bar on the left, then click the text to access settings.
 
 ## On this page
 
@@ -20,7 +18,7 @@ Add the mod on [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows),
 3. [Miscellaneous Tab](#miscellaneous-tab)
 4. [Post-export: What’s Next?](#post-export-whats-next)
 
-## Feedback and Contacts
+## Feedback
 
 You can reach me at:
 
@@ -33,11 +31,7 @@ You can reach me at:
 
 ## General Tab
 
-To open the Carto UI, Select **Options** (⚙️) &rarr; **Carto**. You can also search for Carto in the navigation bar on the left, then click the text to access settings.
-
 ![Default Interface of General Tab](src/Carto-General-Tab-Default.png)
-
-### General Tab interface
 
 The first interface you'll see is the General Tab, where you select the export format, naming conventions, the coordinates of the map center, etc.
 
@@ -50,7 +44,7 @@ The first interface you'll see is the General Tab, where you select the export f
 | Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI & Zoning | The format is not easy to edit as it is encoded in binary format, and reading such format requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
 | GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This is the image format that stores sequential data into pixels. You can open the file with major media viewers (such as Microsoft Photos). | Water bodies or terrain heights|
 
-#### Naming format
+### Naming format
 
 The default option is the “Feature Type.” Other options include “City Name + Feature Type,” “Map Name + Feature Type,” and “Custom.” The first two add the map name and the city name in the current save respectively, such as `My City_Area.shp` or `My Map_Building.json`. The last one allows you to customize the file name, but you should be aware that only one file remains when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later.)
 
@@ -71,7 +65,7 @@ You can use *tokens* in the **Custom Name** field to display several save parame
 > [!IMPORTANT]
 > Tokens are case-sensitive.
 
-#### Latitude and longitude projections
+### Latitude and longitude projections
 
 Carto can project your city on most places on Earth when you provide valid coordinates. You can use online map services like Google Maps to retrieve the coordinates of your target location. Leave latitude and longitude at `0` for no projection.
 
@@ -81,7 +75,7 @@ Carto can project your city on most places on Earth when you provide valid coord
 
 *Right-click any location on Google Maps, and a menu with the coordinates information will show up.*
 
-#### Exporting files
+### Exporting files
 
 Click **Export Files** to export in-game objects. Once the export finishes (A dialog will inform you that the files are exported successfully), click **Open Export Directory** to access the output folder (`C:\Users\<UserName>\AppData\LocalLow\Colossal Order\Cities Skylines II\ModsData\Carto`). Since Carto can only collect the relevant data after a save is loaded or an editor is launched, *the **Export Files** remains disabled until the condition is met*.
 
@@ -114,7 +108,7 @@ Carto provides two types of fields: *spatial* and *non-spatial*. The former stor
 
 ![Illustration of the relationship between spatial and non-spatial fields](src/Carto-Field-Type.png)
 
-### Spatial Fields
+### Spatial fields
 
 Carto supports these spatial fields.
 
@@ -129,7 +123,7 @@ Carto supports these spatial fields.
 |  World Depth |  0.2.1+ |   `Water Bodies` |  Raster (14m × 14m) |  The depth of the water bodies with the region outside of the playable area (world) included.<br> Since the depth of the dummy water bodies outside of the playable area is obtained by the difference between the sea level and the terrain, you should only use the value outside of the playable area, in case you want to merge it with the Depth field.|
 |  World Elevation |  0.2.1+ |   `Terrain` |  Raster (14m × 14m) |  The elevation of the terrain with the region outside of the playable area (world) included. Since the terrain data from the world heightmap will not be updated by the game, you should only use the value outside of the playable area, in case you want to merge it with the Elevation field.|
 
-### Non-Spatial Fields
+### Non-spatial fields
 
 Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fields.
 
@@ -160,7 +154,7 @@ Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fiel
 | Width | 0.1+| `Network`| Float| The width of the network in **meters** (m).|
 | Zoning | 0.2+| `Building` & `Zoning`| String| The classification of designated development purposes.A feature can have multiple zonings. For example, EU Mixed Housing has the zoning of `Residential, Commercial`. All zoning types:<ul><li>`None`<li> `Residential`</li>  <li>`Commercial`<li> `Industrial`</li>  <li>`Office`</li></ul> |
 
-## Miscellaneous Tab
+## Miscellaneous tab
 
 ![Default Interface of Miscellaneous Tab](src/Carto-Misc-Tab-Default.png)
 
@@ -192,19 +186,18 @@ The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color 
 
 ![Use Zone Color Changer’s Color option](src/Carto-Misc-ZCC.png)
 
-## Post-export: What’s Next?
+## Post-export: What’s next?
 
-So after you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations.
+After you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations.
 
-### Using GIS Software
+### Using GIS software
 
 We recommend GIS software because it provides not only a powerful platform to view and edit the data, but also a set of tools to perform in-depth geographical analysis:
 
-* [QGIS](https://www.qgis.org/) is a free and open-source software, and there are numerous QGIS plug-ins developed and maintained by volunteers. (Recommended)<br />
-  * Looking for a step-by-step tutorial to export maps with Carto and QGIS? [[Visit the tutorial here|Tutorial]].
-* [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is a paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from. (Recommended if you have a license)
+* [QGIS](https://www.qgis.org/) is a free and open-source software, and there are numerous QGIS plug-ins developed and maintained by volunteers and is recommended. Here's a [step-by-step tutorial](Tutorial.md) to export maps with Carto and QGIS.
+* [ArcGIS Pro](https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm) is paid software developed by Esri. Compared to its online version (ArcGIS Online), the desktop version has many more analysis tools you can choose from. (Recommended if you have a license)
 
-### Using Online Viewers
+### Using online viewers
 
 If you want to visualize the exported files but don’t have access to GIS software, you can use these sites to upload and view your geospatial data:
 
@@ -213,7 +206,7 @@ If you want to visualize the exported files but don’t have access to GIS softw
 * [Survey Transfer](https://app.surveytransfer.net/) supports GeoJSON, Shapefile, and GeoTIFF. The website requires you to register your account only with a 14-day free trial. (Not recommended)
 * [ArcGIS Online](https://maps.arcgis.com/apps/mapviewer/index.html) supports GeoJSON, Shapefile, and GeoTIFF. However, you have to purchase the license to access the features. (Not recommended if you don’t have a license.)
 
-### Using Geospatial Libraries
+### Using geospatial libraries
 
 If you want to develop a program that works with the data, you might consider some of the following libraries:
 
@@ -223,7 +216,7 @@ If you want to develop a program that works with the data, you might consider so
 
 You can find more information on this topic at [Awesome GIS](https://github.com/sshuair/awesome-gis).
 
-### Show Me Some Examples
+### Examples
 
 Sure, here are some of the examples you can made with Carto:
 
@@ -241,4 +234,5 @@ Sure, here are some of the examples you can made with Carto:
 
 ## More info
 
-[Changelog](carto-changelog.md)
+- [Carto/GIS tutorial](Tutorial.md)
+- [Changelog](carto-changelog.md)
