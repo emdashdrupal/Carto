@@ -33,20 +33,20 @@ You can reach me at:
 
 ## General Tab
 
-To open the Carto UI, Select **Options** (⚙️) &rarr; **Carto**. You can also search for “Carto” in the navigation bar on the left, then click the text to access settings.
+To open the Carto UI, Select **Options** (⚙️) &rarr; **Carto**. You can also search for Carto in the navigation bar on the left, then click the text to access settings.
 
 ![Default Interface of General Tab](src/Carto-General-Tab-Default.png)
 
 ### General Tab interface
 
-The first interface that comes into your view is the General Tab. Here you can select the exported files’ format, naming conventions, the coordinates of the map center, etc.
+The first interface you'll see is the General Tab, where you select the export format, naming conventions, the coordinates of the map center, etc.
 
 > [!IMPORTANT]
 > The file format you select affects the variety of the items that can be exported. Here’s a table to help you choose from these formats.
 
 | File Format | Extension | Category | Supported Feature Types | Description | Good for displaying |
 | ----------- | --------- | ---------| ----------------------- | ------------| ---|
-| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI & Zoning | The format is simple and lightweight and can be edited using a general text editor. It is suitable for the storage and the exchange of small amounts of data, but lacking indexing on each feature results in low search and rendering efficiency. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
+| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI, Zoning | The format is simple and lightweight and can be edited using a general text editor. It is suitable for the storage and the exchange of small amounts of data, but lacking indexing on each feature results in low search and rendering efficiency. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
 | Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI & Zoning | The format is not easy to edit as it is encoded in binary format, and reading such format requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
 | GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This is the image format that stores sequential data into pixels. You can open the file with major media viewers (such as Microsoft Photos). | Water bodies or terrain heights|
 
@@ -54,7 +54,7 @@ The first interface that comes into your view is the General Tab. Here you can s
 
 The default option is the “Feature Type.” Other options include “City Name + Feature Type,” “Map Name + Feature Type,” and “Custom.” The first two add the map name and the city name in the current save respectively, such as `My City_Area.shp` or `My Map_Building.json`. The last one allows you to customize the file name, but you should be aware that only one file remains when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later.)
 
-> Due to a known issue, the “Custom Name” input text box doesn’t appear when the option “Custom Name” is selected in the dropdown. Please double-click the “Show Advanced” button in the upper middle of the screen, so as to force the game to reload the user interface.
+> Due to a known issue, the “Custom Name” input text box doesn’t appear when the option “Custom Name” is selected in the drop-down. Click **Show Advanced** twice to force the game to reload the user interface.
 
 ![Custom file name format input box](src/Carto-General-Custom-Format.png)
 
@@ -71,15 +71,19 @@ You can use *tokens* in the **Custom Name** field to display several save parame
 > [!IMPORTANT]
 > Tokens are case-sensitive.
 
-The **latitude** and the **longitude** options are the highlight: Carto can project your city to most places on Earth as long as you provide a valid coordinate. You can use online map services like Google Maps to retrieve the coordinates of your target location, as shown in the image below. Of course, if there are no places you particularly want to project to, you can set both of them to zero.
+#### Latitude and longitude projections
+
+Carto can project your city on most places on Earth when you provide valid coordinates. You can use online map services like Google Maps to retrieve the coordinates of your target location. Leave latitude and longitude at `0` for no projection.
 
 > Technical Details: The Projected Coordinate System (PCS) Carto uses is the [Universal Transverse Mercator](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system) (UTM), and the datum is [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System#WGS_84). UTM projection is applicable to any place on Earth as long as they are between 84°N and 80°S. Carto always exports files into UTM / WGS84 zone XXY (EPSG: 326XX / 327XX) projections except for GeoJSONs, since the OGC specification asks the software to treat the value in the spatial fields of GeoJSONs as EPSG: 4326 coordinates.
 
-![How to find out coordinates with Google Maps](src/Google-Find-Coord.png)
+![Find coordinates with Google Maps](src/Google-Find-Coord.png)
 
 *Right-click any location on Google Maps, and a menu with the coordinates information will show up.*
 
-If everything is ready, you can click the “Export Files” button to export in-game objects. Once the export finishes (A dialog will inform you that the files are exported successfully), you can click the “Open Export Directory” button on the left to access the output folder (`C:\Users\<UserName>\AppData\LocalLow\Colossal Order\Cities Skylines II\ModsData\Carto`) quickly. Since Carto can only collect the relevant data after a save is loaded or an editor is launched, **the “Export Files” button will remain disabled until the condition mentioned is met**.
+#### Exporting files
+
+Click **Export Files** to export in-game objects. Once the export finishes (A dialog will inform you that the files are exported successfully), click **Open Export Directory** to access the output folder (`C:\Users\<UserName>\AppData\LocalLow\Colossal Order\Cities Skylines II\ModsData\Carto`). Since Carto can only collect the relevant data after a save is loaded or an editor is launched, *the **Export Files** remains disabled until the condition is met*.
 
 In addition to the Version and the User Manual (the article you are reading now) button, the “Reset Mod Settings” button is also located at the bottom of the tab. To prevent accidental clicks, a confirmation dialog will appear after the user clicks on the button.
 
