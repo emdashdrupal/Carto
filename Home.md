@@ -89,7 +89,7 @@ In addition to the Version and the User Manual (the article you are reading now)
 
 ## Custom Export Tab
 
-The second tab is the Custom Export Tab, where you can customize the contents and the items you want to export. Normally the options in this tab can’t be changed at once, because the options not applicable to the current selected file format will be disabled. Here’s a table of available features provided by Carto:
+The second tab is the Custom Export Tab, where you can customize the contents and the items you want to export. Normally the options in this tab can’t be changed at once, because the options aren't applicable to the current selected file format will be disabled. Here’s a table of available features provided by Carto:
 
 ![Default Interface of the Custom Export Tab](src/Carto-Custom-Export-Tab-Default.png)
 
