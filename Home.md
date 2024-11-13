@@ -10,24 +10,23 @@ Use Carto to export your city data and visualize it in layers in Geographical In
 On this page:
 
 - [Install Carto](#install-carto)
-- [General tab](#general-tab)
-- [Custom Export tab](#custom-export-tab)
-- [Miscellaneous tab](#miscellaneous-tab)
+- [Choose file format options](#choose-file-format-options)
+- [Set custom export options](#set-custom-export-options)
+- [Set miscellaneous options](#set-miscellaneous-options)
 - [Export files](#export-files)
 - [Post-export: Now what?](#post-export-now-what)
 - [Feedback](#feedback)
 - [More info](#more-info)
 
-
 ## Install Carto
 
-Add the mod to Cities:Skylines 2 from [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the only official distribution channel. When you launch the game, the mod should automatically load.
+Add the mod to Cities:Skylines 2 from [Paradox Mods](https://mods.paradoxplaza.com/mods/87428/Windows), which is the official distribution channel. When you launch the game, the mod should automatically load.
 
 To open Carto, select **Options** (⚙️) &rarr; **Carto** in-game. You can also search for Carto in the navigation bar on the left, then click the text to access settings.
 
-## General tab
+## Choose file format options
 
-The first interface you'll see is the General tab, where you select the export format, naming conventions, the coordinates of the map center, etc.
+On the General tab, you'll select the export format, naming conventions, the coordinates of the map center, and export the files.
 
 ![Default Interface of General tab](src/Carto-General-Tab-Default.png)
 
@@ -36,9 +35,9 @@ The first interface you'll see is the General tab, where you select the export f
 
 | File Format | Extension | Category | Supported Feature Types | Description | Good for displaying |
 | ----------- | --------- | ---------| ----------------------- | ------------| ---|
-| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI, Zoning | The format is simple and lightweight and can be edited using a general text editor. It is suitable for the storage and the exchange of small amounts of data, but lacking indexing on each feature results in low search and rendering efficiency. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
-| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI,  Zoning | The format is not easy to edit as it is encoded in binary format, and reading such format requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells|
-| GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This is the image format that stores sequential data into pixels. You can open the file with major media viewers (such as Microsoft Photos). | Water bodies or terrain heights|
+| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI, Zoning | The format is simple and lightweight and can be edited using a general text editor. It's suitable for storing and exchanging small amounts of data, but lacks indexing on each feature (metadata is hard to work with), resulting in low search and rendering efficiency. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells.|
+| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI,  Zoning | The format is not easy to edit as it's in binary format, and also requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed (more metadata fields used).  | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells.|
+| GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This image format stores sequential data such as elevation as pixels. You can open the file with major media viewers (such as Microsoft Photos), and use it as a background in GIS tools. | Water bodies or terrain heights. |
 
 ### Export file naming formats
 
@@ -46,7 +45,7 @@ The default option is **Feature Type**. You can choose **City Name + Feature Typ
 
 > [!TIP]
 >
-> Due to a known issue, the **Custom Name** field doesn’t display when you select **Custom Name** from the drop-down. Click **Show Advanced** twice to force the game to reload the user interface.
+> Due to a known issue, the **Custom Name** field doesn't display when you select **Custom Name** from the drop-down. Click **Show Advanced** twice to force the game to reload the user interface.
 
 ![Custom file name format input box](src/Carto-General-Custom-Format.png)
 
@@ -67,7 +66,7 @@ You can use *tokens* in the **Custom Name** field to display several save parame
 
 ### Latitude and longitude projections
 
-Carto can project your city on most places on Earth when you provide valid coordinates. You can use online map services like Google Maps to retrieve the coordinates of your target location. Leave latitude and longitude at `0` for no projection.
+If you provide valid coordinates, Carto can project your city on most places on Earth. You can use online map services like Google Maps to retrieve the coordinates of your target location. Leave latitude and longitude at `0` for no projection.
 
 To find coordinates, right-click any location on Google Maps, then copy the coordinates that display.
 
@@ -77,7 +76,7 @@ To find coordinates, right-click any location on Google Maps, then copy the coor
 
 The Projected Coordinate System (PCS) Carto uses is the [Universal Transverse Mercator](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system) (UTM), and the datum is [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System#WGS_84). UTM projection is applicable to any place on Earth as long as they are between 84°N and 80°S. Carto always exports files into UTM / WGS84 zone XXY (EPSG: 326XX / 327XX) projections except for GeoJSONs, since the OGC specification asks the software to treat the value in the spatial fields of GeoJSONs as EPSG: 4326 coordinates.
 
-## Custom Export tab
+## Set custom export options
 
 The second tab is the Custom Export tab, where you can customize what you export. Normally the options in this tab can’t be changed at once, because the options aren't applicable to the current selected file format will be disabled.
 
@@ -152,11 +151,11 @@ Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fiel
 | Width | 0.1+| `Network`| Float| The width of the network in **meters** (m).|
 | Zoning | 0.2+| `Building`, `Zoning`| String| The classification of designated development purposes.A feature can have multiple zonings. For example, EU Mixed Housing has the zoning of `Residential, Commercial`. All zoning types:<ul><li>`None`<li> `Residential`</li>  <li>`Commercial`<li> `Industrial`</li>  <li>`Office`</li></ul> |
 
-## Miscellaneous tab
+## Set miscellaneous options
 
 ![Default Interface of Miscellaneous tab](src/Carto-Misc-Tab-Default.png)
 
-The last interface is the Miscellaneous tab. The first option is the <a id="geotiff-format"></a>**GeoTIFF Format**, and you can choose from the following three formats: Int16, Norm16, and Float32.
+The last interface is the Miscellaneous tab. The first option is the <a id="geotiff-format"></a>**GeoTIFF Format**. You can choose from Int16, Norm16, and Float32 formats
 
 |  Abbreviation  |   Full Name    | Description |
 | ------ | ---------------------- | ----------- |
@@ -168,19 +167,16 @@ The second option is the **POI Category Format** option. Users can select from t
 
 The third option is the **Export Sub-Building Upgrades’ POIs** option. Users can decide whether to export sub-building upgrades as individual POIs or not; default to be false.
 
-The fourth option is the <a id="CountHomelessResidents"></a> **Count Homeless Residents** option. When enabled, the homeless that **live in the park** will be counted into corresponding fields. Here’s a table showing how Carto performs the census:
+The fourth option is the <a id="CountHomelessResidents"></a> **Count Homeless Residents** option. When enabled, the homeless that *live in parks* are counted into corresponding fields. This table explains how Carto performs the census, assuming **Count Homeless Residents** is enabled:
 
 | Field                | Normal Citizens | The Homeless                   | Foreigners (Tourist / Transit / Migrant Workers)| Description |
 | -------------------- | ----------------| -------------------------------|-------------------------------------------------|-------------|
 | Household / Resident | ✅              | ⚠️Only those live in the park | ❌                                              |The homeless without any temporary shelters can be regarded as foreigners. |
 | Employee             | ✅              | ✅                            | ✅                                              |The homeless and migrant workers are valid workers. |
 
-> {!NOTE}
-> Assumes the Count Homeless Residents option is enabled.
-
 The fifth option is the <a id="ExportUnzoned"></a> **Export Unzoned Zoning Cells** option. When enabled, Carto will export every zoning cells, even if they are not zoned (empty). Disable this option to reduce the file size.
 
-The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color Changer’s Color** option. This option will only appear when Carto detects that [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) mod is loaded. When enabled, the Color field is replaced by Zone Color Changer’s current settings.
+The sixth option is the <a id="UseZoneColorChangersColor"></a> **Use Zone Color Changer’s Color** option. This option displays when Carto detects the [Zone Color Changer](https://mods.paradoxplaza.com/mods/81568/Windows) mod is loaded. When enabled, the Color field is replaced by Zone Color Changer’s current settings.
 
 ![Use Zone Color Changer’s Color option](src/Carto-Misc-ZCC.png)
 
@@ -192,7 +188,7 @@ You can reset all settings by clicking **Reset Mod Settings**. To prevent accide
 
 ## Post-export: Now what?
 
-After you export the files, how do you view and use the data? The following provides you with some suggestions based on different situations.
+After you export the files, how do you view and use the data?
 
 ### Use Carto data with GIS software
 
@@ -212,7 +208,7 @@ If you want to visualize the exported files but don’t have access to GIS softw
 
 ### Use Carto data with geospatial libraries
 
-If you want to develop a program that works with the data, consider these libraries:
+If you want to develop an application that works with the data, consider these libraries:
 
 - [GDAL](https://github.com/OSGeo/gdal) is a library that serves as a convertor between multiple geospatial data formats.
 - [GeoPandas](https://github.com/geopandas/geopandas) is a Python library where you can access data by the class `GeoDataFrame`.
@@ -232,8 +228,6 @@ Here are some examples you can make with Carto.
 
     ![Beverage Industry Map](src/Carto-Example-2.png)
 
-
-
 This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process:
 
 ![Application In Georeferencing](src/Carto-Example-3.png)
@@ -247,7 +241,7 @@ You can reach me at:
 - 🛜 [Cities: Skylines Taiwan Assets](https://discord.gg/Gz4K66jT64) - *Chinese preferred*
 - 📧 [4alpelna4lve@gmail.com](mailto:4alpelna4lve@gmail.com)
 
- If you need to start a more in-depth discussion or report complicated bugs, use GitHub’s issues or discussions, as it isn’t easy to track them between threads.
+ To start a more in-depth discussion or report complicated bugs, use GitHub’s issues or discussions, as it isn’t easy to track them between threads.
 
 ## More info
 
