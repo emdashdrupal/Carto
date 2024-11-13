@@ -1,6 +1,6 @@
 # Carto wiki homepage
 
-Use Carto to export your city data and visualize it in layers in Geographical Information Systems (GIS) software or online viewers. This can help you analyze your city and plan ahead.
+Use the Carto mod for Cities: Skylines 2 to export your city data, and visualize it in layers in Geographical Information Systems (GIS) software or online viewers. This can help you analyze your city and plan ahead.
 
 > [!TIP]
 > This manual is compatible with version 0.3.
@@ -49,24 +49,24 @@ The default option is **Feature Type**. You can choose **City Name + Feature Typ
 
 ![Custom file name format input box](src/Carto-General-Custom-Format.png)
 
-You can use *tokens* in the **Custom Name** field to display several save parameters:
+You can use *tokens* in the **Custom Name** field to define some save parameters:
 
 | Token | Description | Example |
 | ----- | ----------- | ------- |
 | `{Feature}` | The feature type. | `Area` |
 | `{City}`    | The name of the city. | `My City` |
-| `{Map}`     | The name of the map. | `My Map` |
+| `{Map}`     | The name of the map. | `Magnolia County` |
 | `{Date}`    | The in-game date that follows [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. | `2027-04` |
 | `{Time}`    | The in-game time using `HHmm` format. | `1200` |
 
 > [!IMPORTANT]
 >
 > - Tokens are case-sensitive.
-> - When you select **Custom**, only one file is created when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later.)
+> - When you select **Custom**, only one file is created when multiple files are exported under the same name (The file exported previously will be overwritten by the file exported later).
 
 ### Latitude and longitude projections
 
-If you provide valid coordinates, Carto can project your city on most places on Earth. You can use online map services like Google Maps to retrieve the coordinates of your target location. Leave latitude and longitude at `0` for no projection.
+If you provide valid coordinates, Carto can project your city on most places on Earth. You can use online map services like Google Maps to determine the coordinates of your target location. Leave latitude and longitude at `0` for no projection.
 
 To find coordinates, right-click any location on Google Maps, then copy the coordinates that display.
 
@@ -78,11 +78,11 @@ The Projected Coordinate System (PCS) Carto uses is the [Universal Transverse Me
 
 ## Set custom export options
 
-The second tab is the Custom Export tab, where you can customize what you export. Normally the options in this tab can’t be changed at once, because the options aren't applicable to the current selected file format will be disabled.
+The second tab is the Custom Export tab, where you can customize what you export. The options that display depend on the file format you selected on the General tab.
 
 ![Default Interface of the Custom Export tab](src/Carto-Custom-Export-tab-Default.png)
 
-Here’s a table of available features provided by Carto:
+These are the features you can customize:
 
 | Feature Name | Category | Contents | Image |
 | ------------ | -------- | -------- |:-----:|
@@ -92,16 +92,19 @@ Here’s a table of available features provided by Carto:
 | POI (Point of Interest) | Vector   | The location of the buildings or transportation stops’ markers | ![POIs](src/Carto-POI.png) |
 | Terrain      | Raster   | The terrain elevation | ![Terrain](src/Carto-Terrain.png) |
 | Water Bodies | Raster   | The water depths | ![Water Bodies](src/Carto-Water.png) |
-| Zoning       | Vector   | The zoning cells (small blocks) | ![Zonings](src/Carto-Zoning.png) |
+| Zoning       | Vector   | The zoning cells (small blocks) | ![Zoning](src/Carto-Zoning.png) |
 
-Users only need to switch between the six options in the table above under general circumstances. For the users who want to have all controls over the exported fields, Carto also provides them the **Advanced Mode** to play with. To enable the advanced mode, users just need to click on the **Show Advanced** button. New options, including a drop-down selector and several checkboxes, will appear at the bottom of the **Zoning** option. You can configure each feature type’s fields, by selecting the feature type in the **Select Feature** drop-down first, then manually toggling the fields you want to change.
+In general, you'll only need to select from these six options. If you want to have greater control over the exported fields, select **Advanced Mode**. You can configure each feature type's fields by selecting an option from the **Select Feature** drop-down.
 
 > [!NOTE]
 > Due to a known issue, double-click **Show Advanced** button after switching options in the **Select Feature** drop-down to force the game to reload the interface.
 
 ![Advanced Mode](src/Carto-Custom-Export-tab-Advanced.png)
 
-Carto provides two types of fields: *spatial* and *non-spatial*. The former stores the spatial data of the currently selected features, that is, their *shapes*; the latter stores the attribute data of the currently selected features, in other words, their *statistical data*. Currently, Carto requires users to select at least one spatial field for each feature, while there are no restrictions on non-spatial fields (because Carto always outputs the Name field of the object). The next sections describe the fields supported by Carto:
+Carto provides two types of fields:
+
+- Spatial stores the spatial data (*shapes*) of the currently selected features.
+- Non-spatial stores the attribute (*statistical data*) of the currently selected features. You must select at least one spatial field for each feature. There are no restrictions on non-spatial fields because Carto always outputs the Name field of the object.
 
 ![Illustration of the relationship between spatial and non-spatial fields](src/Carto-Field-Type.png)
 
@@ -109,7 +112,7 @@ Carto provides two types of fields: *spatial* and *non-spatial*. The former stor
 
 Carto supports these spatial fields.
 
-| Fieldname | Version | Feature | Geometry | Description |
+| Field name | Version | Feature | Geometry | Description |
 |-|-|-|-|-|
 | Centerline| 0.1+ | `Network` | Vector (lines) | The centerline of the network is widely used in network analysis.|
 | Centerline |  0.1+ |   `Network` |  Vector (Lines) |  The centerline of the network is widely used in network analysis|
@@ -124,7 +127,7 @@ Carto supports these spatial fields.
 
 Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fields.
 
-| Fieldname | Version | Feature |Data type | Description |
+| Field name | Version | Feature |Data type | Description |
 |-|-|-|-|-|
 | Address | 0.2+ | `Building`, `POI`| Composite (String, Integer)| The in-game building identifier.This field is a composite field. Three fields will be exported:    <ul><li>GeoJSON: `Address_District`, `Address_Street`, `Address_Number`.<li> Shapefile: `Addr_dist`, `Addr_strt`, `Addr_nmbr`.</li>    <li>Before 0.2.5 update, these fields had different names: `Address.District`, `Address.Street`, `Address.Number`, `Addr.dist`, `Addr.strt`, `Addr.nmbr`.<ul><li> The buildings will be classified as **(Unincorporated Area)** if they don't belong to any districts. The buildings without a house number will receive the default of 0.</li></li></ul>|
 | Area| 0.1+| `Area`| Float| The extent of the object in **square meters** (m<sup>2</sup>).|
@@ -134,7 +137,7 @@ Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fiel
 | Center| 0.1+| `Area`| Composite (Float)| The center coordinate of the area.<ul><li> This field is a **composite field**. Three fields will be exported:</li>  <li>GeoJSON, Shapefile: `Center_x`, `Center_y`, `Center_z`.<li> Before 0.2.5 update, these fields had different names: `Center.x`, `Center.y`, `Center.z`. <ul><li> The coordinate exported is the in-game coordinates, where the origin is the map center.</li></li></ul>|
 | Color| 0.1.1+| `Zoning`| String| The zoning color in the game. <ul><li> When the [Use Zone Color Changer’s Color](#UseZoneColorChangersColor) option is enabled, the value will be replaced by the Zone Color Changer mod’s current settings.|
 | Company| 0.2.2+| `Area`| Integer| Number of companies in the area.<ul><li> Carto regards a factory or a store as one company. Even if the stores are owned by the same brand, Carto still counts them individually.</li><li>Carto doesn’t export company count of each map tiles.|
-| Density| 0.1.1+| `Zoning`| String| The development intensity of the zoning type.<ul><li> The density of zonings:</li>  <li>`Generic`<li> `Low`</li>  <li>`Medium`<li> `High`</li></ul>|
+| Density| 0.1.1+| `Zoning`| String| The development intensity of the zoning type.<ul><li> The density of zoning:</li>  <li>`Generic`<li> `Low`</li>  <li>`Medium`<li> `High`</li></ul>|
 | Direction| 0.1+| `Network`| String| The direction that vehicles move along to.<ul><li> The direction of networks:</li>  <li>`Both`<li> `Forward`</li>  <li>`Backward`</li></ul>|
 | Employee| 0.2+| `Area`, `Building`| Integer| The number of employees in the area.<ul><li> Carto doesn’t export employee count of each map tiles.</li></ul>|
 | Form | 0.1+| `Network`| String| The style of the network. <ul><li> The form of networks:</li>  <li>`Normal`<li> `Elevated`</li>  <li>`Tunnel`|
@@ -149,7 +152,7 @@ Carto supports 23+ 1 non-spatial fields. GeoTIFF *doesn't* have non-spatial fiel
 | Theme| 0.1.1+| `Building`, `Zoning`| String| The style of the assets.|
 | Unlocked | 0.1+| `Area`| Boolean / Integer| The purchase status of the map tiles. <ul><li> When exported into GeoJSON: boolean (true / false); when exported into Shapefile: integer (0 / 1).</li></ul>|
 | Width | 0.1+| `Network`| Float| The width of the network in **meters** (m).|
-| Zoning | 0.2+| `Building`, `Zoning`| String| The classification of designated development purposes.A feature can have multiple zonings. For example, EU Mixed Housing has the zoning of `Residential, Commercial`. All zoning types:<ul><li>`None`<li> `Residential`</li>  <li>`Commercial`<li> `Industrial`</li>  <li>`Office`</li></ul> |
+| Zoning | 0.2+| `Building`, `Zoning`| String| The classification of designated development purposes.A feature can have multiple zoning. For example, EU Mixed Housing has the zoning of `Residential, Commercial`. All zoning types:<ul><li>`None`<li> `Residential`</li>  <li>`Commercial`<li> `Industrial`</li>  <li>`Office`</li></ul> |
 
 ## Set miscellaneous options
 
