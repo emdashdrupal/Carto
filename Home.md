@@ -15,6 +15,7 @@ On this page:
 - [Set miscellaneous options](#set-miscellaneous-options)
 - [Export files](#export-files)
 - [Post-export: Now what?](#post-export-now-what)
+- [Styling examples](#styling-examples)
 - [Feedback](#feedback)
 - [More info](#more-info)
 
@@ -222,7 +223,7 @@ If you want to develop an application that works with the data, consider these l
 
 You can find more information on this topic at [Awesome GIS](https://github.com/sshuair/awesome-gis).
 
-### Styling examples
+## Styling examples
 
 You can change the display of data like points of interest using Carto styles in tools like QGIS.
 
