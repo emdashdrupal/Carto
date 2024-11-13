@@ -35,8 +35,8 @@ On the General tab, you'll select the export format, naming conventions, the coo
 
 | File Format | Extension | Category | Supported Feature Types | Description | Good for displaying |
 | ----------- | --------- | ---------| ----------------------- | ------------| ---|
-| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI, Zoning | The format is simple and lightweight and can be edited using a general text editor. It's suitable for storing and exchanging small amounts of data, but lacks indexing on each feature (metadata is hard to work with), resulting in low search and rendering efficiency. | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells.|
-| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI,  Zoning | The format is not easy to edit as it's in binary format, and also requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed (more metadata fields used).  | Buildings, roads, tracks, pathways, points of interest (POIs), district borders, map tile borders, or zoning cells.|
+| GeoJSON     |  `.json`  |  Vector  | Area, Building, Network, POI, Zoning | The format is simple and lightweight and can be edited using a general text editor. It's suitable for storing and exchanging small amounts of data, but lacks indexing on each feature (metadata is hard to work with), resulting in low search and rendering efficiency. | Buildings, roads, tracks, pathways, points of interest (POI), district borders, map tile borders, or zoning cells.|
+| Shapefile   | `.shp`, `.shx`, `.dbf`, etc. | Vector | Area, Building, Network, POI,  Zoning | The format is not easy to edit as it's in binary format, and also requires multiple [sidecar files](https://en.wikipedia.org/wiki/Sidecar_file). However, the efficiency of reading and rendering is higher since the features are pre-indexed (more metadata fields used).  | Buildings, roads, tracks, pathways, points of interest (POI), district borders, map tile borders, or zoning cells.|
 | GeoTIFF     | `.tif`    | Raster   | Terrain, Water Bodies | This image format stores sequential data such as elevation as pixels. You can open the file with major media viewers (such as Microsoft Photos), and use it as a background in GIS tools. | Water bodies or terrain heights. |
 
 ### Export file naming formats
@@ -90,7 +90,7 @@ These are the features you can customize:
 | Area         | Vector   | The boundaries of districts and map tiles | ![Districts](src/Carto-Area.png) |
 | Building     | Vector   | The collision area of buildings | ![Buildings](src/Carto-Building.png) |
 | Network      | Vector   | The centerline and the edge of roads, tracks, and pathways | ![Roads](src/Carto-Network.png) |
-| POI (Point of Interest) | Vector   | The location of the buildings or transportation stops’ markers | ![POIs](src/Carto-POI.png) |
+| POI (Point of Interest) | Vector   | The location of the buildings or transportation stops’ markers | ![POI](src/Carto-POI.png) |
 | Terrain      | Raster   | The terrain elevation | ![Terrain](src/Carto-Terrain.png) |
 | Water Bodies | Raster   | The water depths | ![Water Bodies](src/Carto-Water.png) |
 | Zoning       | Vector   | The zoning cells (small blocks) | ![Zoning](src/Carto-Zoning.png) |
@@ -171,7 +171,7 @@ The last interface is the **Miscellaneous** tab. The first option is the <a id="
 
 The second option is **POI Category Format**. You can select: <ul><li>**All** to export all applicable POI categories.</li><li> **Single** to export the most applicable one; default is **All**.</li></ul>
 
-The third option is the **Export Sub-Building Upgrades’ POIs** option. Users can decide whether to export sub-building upgrades as individual POIs or not; default to be false.
+The third option is the **Export Sub-Building Upgrades’ POIs** option. Users can decide whether to export sub-building upgrades as individual POI or not; default to be false.
 
 The fourth option is the <a id="CountHomelessResidents"></a> **Count Homeless Residents** option. When enabled, the homeless that *live in parks* are counted into corresponding fields. This table explains how Carto performs the census, assuming **Count Homeless Residents** is enabled:
 
@@ -222,17 +222,19 @@ If you want to develop an application that works with the data, consider these l
 
 You can find more information on this topic at [Awesome GIS](https://github.com/sshuair/awesome-gis).
 
-### Examples
+### Styling examples
 
-Here are some examples you can make with Carto.
+You can change the display of data like points of interest using Carto styles in tools like QGIS.
 
-- A classic street map using Area, Building, Network (Edge), POIs, Terrain, and Water Bodies features:
+- A classic street map using Area, Building, Network (Edge), POI, Terrain, and Water Bodies features:
 
     ![Classic Street Map](src/Carto-Example-1.png)
 
 - A map showing the fierce competition of the beverage industry in the city, using Area, Building, and Water Bodies features:
 
     ![Beverage Industry Map](src/Carto-Example-2.png)
+
+    <!-- a tutorial on how to do this would be fantastic! -->
 
 This is an example showing that you can use Building, Network, and Zoning features to assist your georeferencing process:
 
@@ -247,7 +249,7 @@ You can reach me at:
 - 🛜 [Cities: Skylines Taiwan Assets](https://discord.gg/Gz4K66jT64) - *Chinese preferred*
 - 📧 [4alpelna4lve@gmail.com](mailto:4alpelna4lve@gmail.com)
 
- To start a more in-depth discussion or report complicated bugs, use GitHub’s issues or discussions, as it isn’t easy to track them between threads.
+ Use GitHub’s issues or discussions to start a more in-depth discussion or report complicated bugs, as it isn’t easy to track them between threads.
 
 ## More info
 
